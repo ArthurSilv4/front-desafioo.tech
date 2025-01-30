@@ -3,6 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/Layout/Header/page";
 import { Footer } from "@/components/Layout/Footer/page";
+import FAQ from "@/components/Layout/Main/FAQ/page";
+import { Separator } from "@radix-ui/react-separator";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,7 +32,11 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased `}
       >
         <Header />
-        <main>{children}</main>
+        <main className="max-w-screen-2xl mx-auto p-4">
+          {children}
+          <FAQ />
+          <Separator className="bg-gray-300 h-[1px]" />
+        </main>
         <Footer />
       </body>
     </html>

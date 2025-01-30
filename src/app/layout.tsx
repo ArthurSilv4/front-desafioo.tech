@@ -5,6 +5,7 @@ import { Header } from "@/components/Layout/Header/page";
 import { Footer } from "@/components/Layout/Footer/page";
 import FAQ from "@/components/Layout/Main/FAQ/page";
 import { Separator } from "@radix-ui/react-separator";
+import { Creators } from "@/components/Layout/Main/Creators/page";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,6 +35,7 @@ export default function RootLayout({
         <Header />
         <main className="max-w-screen-2xl mx-auto p-4">
           {children}
+          <Creators />
           <FAQ />
           <Separator className="bg-gray-300 h-[1px]" />
         </main>

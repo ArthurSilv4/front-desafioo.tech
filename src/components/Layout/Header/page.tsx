@@ -42,7 +42,7 @@ export function Header() {
   );
 
   return (
-    <header className="bg-background shadow-md">
+    <header>
       <div className="container mx-auto flex items-center justify-between p-4 md:p-8">
         <div>
           <Link href="/" className="flex items-center gap-2">

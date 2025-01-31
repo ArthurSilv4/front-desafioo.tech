@@ -7,6 +7,7 @@ import FAQ from "@/components/Layout/Main/FAQ/page";
 import { Separator } from "@radix-ui/react-separator";
 import { Creators } from "@/components/Layout/Main/Creators/page";
 import { CategoryList } from "@/components/Layout/Main/CategoryList/page";
+import { StartProgramming } from "@/components/Layout/Main/StartProgramming/page";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -37,6 +38,7 @@ export default function RootLayout({
         <main className="max-w-screen-2xl mx-auto">
           <CategoryList />
           {children}
+          <StartProgramming />
           <Creators />
           <FAQ />
           <Separator className="bg-gray-300 h-[1px]" />

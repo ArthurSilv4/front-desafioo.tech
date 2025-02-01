@@ -19,13 +19,13 @@ export function StartProgramming() {
       <div className="container mx-auto px-4">
         <div className=" md:flex md:justify-between md:items-center">
           <div className="md:max-w-[60%]">
-            <h2 className="text-4xl font-extrabold mb-8">{content.title}</h2>
+            <h2 className="text-4xl font-bold mb-8">{content.title}</h2>
             {Object.keys(content)
               .filter((key) => key.startsWith("paragraph"))
               .map((key) => (
                 <div
                   key={key}
-                  className="text-lg font-semibold text-justify mt-4 tracking-wide"
+                  className="text-lg text-justify mt-4 tracking-wide"
                 >
                   <ReactMarkdown>
                     {content[key as keyof typeof content]}

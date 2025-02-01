@@ -24,7 +24,7 @@ export function Header() {
   const NavItems = () => (
     <>
       <NavigationMenuItem>
-        <Link href="/como-funciona" legacyBehavior passHref>
+        <Link href="/#faq" legacyBehavior passHref scroll={true}>
           <NavigationMenuLink>COMO FUNCIONA</NavigationMenuLink>
         </Link>
       </NavigationMenuItem>
@@ -34,7 +34,12 @@ export function Header() {
         </Link>
       </NavigationMenuItem>
       <NavigationMenuItem>
-        <Link href="/feedback" legacyBehavior passHref>
+        <Link
+          href="https://forms.gle/PU8eiH8GpPSmPfrA8"
+          legacyBehavior
+          passHref
+          target="_blank"
+        >
           <NavigationMenuLink>FEEDBACK</NavigationMenuLink>
         </Link>
       </NavigationMenuItem>
@@ -61,7 +66,7 @@ export function Header() {
 
           <div>
             <Button variant="outline" asChild>
-              <Link href="/entrar">Entrar</Link>
+              <Link href="/singIn">Entrar</Link>
             </Button>
           </div>
         </nav>
@@ -85,7 +90,7 @@ export function Header() {
                   </NavigationMenuList>
                 </NavigationMenu>
                 <Button variant="outline" asChild className="w-full">
-                  <Link href="/entrar" onClick={() => setIsOpen(false)}>
+                  <Link href="/singIn" onClick={() => setIsOpen(false)}>
                     Entrar
                   </Link>
                 </Button>

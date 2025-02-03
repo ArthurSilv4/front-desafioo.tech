@@ -1,24 +1,23 @@
+"use client";
+
+import { DashboardHeader } from "@/components/Dashboard/Header/page";
 import { AppSideBar } from "@/components/SideBar/page";
-import {
-  SidebarInset,
-  SidebarProvider,
-  SidebarTrigger,
-} from "@/components/ui/sidebar";
-import { ReactNode } from "react";
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
+import { ReactNode, useState } from "react";
 
 interface DashboardLayoutProps {
   children: ReactNode;
 }
 
 export default function DashboardLayout({ children }: DashboardLayoutProps) {
+  const [open, setOpen] = useState(true);
+
   return (
-    <SidebarProvider>
+    <SidebarProvider open={open} onOpenChange={setOpen}>
       <AppSideBar />
       <SidebarInset>
-        <main>
-          <SidebarTrigger />
-          {children}
-        </main>
+        <DashboardHeader />
+        <main>{children}</main>
       </SidebarInset>
     </SidebarProvider>
   );

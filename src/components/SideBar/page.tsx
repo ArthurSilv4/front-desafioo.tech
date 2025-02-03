@@ -32,7 +32,7 @@ export function AppSideBar() {
   const pathname = usePathname();
 
   return (
-    <Sidebar>
+    <Sidebar collapsible="icon">
       <SidebarHeader>
         <SidebarMenuButton>
           <Link href="/" className="flex items-center gap-2">
@@ -41,7 +41,7 @@ export function AppSideBar() {
           </Link>
         </SidebarMenuButton>
       </SidebarHeader>
-      <SidebarContent>
+      <SidebarContent className="m-2">
         <SidebarMenu>
           {menuItemsContent.map((item) => (
             <SidebarMenuItem key={item.name} className="font-semibold">
@@ -73,10 +73,14 @@ export function AppSideBar() {
           ))}
           <Separator orientation="horizontal" className="h-[1px] bg-gray-300" />
         </SidebarMenu>
-        <p className="text-xs text-muted-foreground ">
-          &copy; {new Date().getFullYear()} Desafioo.Tech. Todos os direitos
-          reservados.
-        </p>
+
+        <SidebarMenuButton className="flex items-center gap-3 cursor-auto">
+          <span>&copy;</span>
+          <p className="text-xs text-muted-foreground">
+            {new Date().getFullYear()} Desafioo.Tech. Todos os direitos
+            reservados.
+          </p>
+        </SidebarMenuButton>
       </SidebarFooter>
     </Sidebar>
   );

@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, PlusCircle, List, Settings, User, Sword } from "lucide-react";
+import { Home, PlusCircle, Settings, User, Sword } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -15,15 +15,18 @@ import { Separator } from "@radix-ui/react-separator";
 import { MessageCircle, Heart, LogOut } from "lucide-react";
 
 const menuItemsContent = [
-  { name: "Home", icon: Home, href: "/" },
-  { name: "Criar Desafio", icon: PlusCircle, href: "/criar-desafio" },
-  { name: "Meus Desafios", icon: List, href: "/meus-desafios" },
-  { name: "Configurações", icon: Settings, href: "/configuracoes" },
-  { name: "Perfil", icon: User, href: "/perfil" },
+  { name: "Home", icon: Home, href: "/dashboard" },
+  { name: "Criar Desafio", icon: PlusCircle, href: "/dashboard/newChallenge" },
+  { name: "Configurações", icon: Settings, href: "/dashboard/settings" },
+  { name: "Perfil", icon: User, href: "/dashboard/profile" },
 ];
 
 const menuItemsFooter = [
-  { name: "FeedBack", icon: MessageCircle, href: "" },
+  {
+    name: "FeedBack",
+    icon: MessageCircle,
+    href: "https://forms.gle/PU8eiH8GpPSmPfrA8",
+  },
   { name: "Apoiar", icon: Heart, href: "/sobre" },
   { name: "Sair", icon: LogOut, href: "/sair" },
 ];

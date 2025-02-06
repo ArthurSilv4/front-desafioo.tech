@@ -16,12 +16,15 @@ const categories = [
 
 export function CategoryList() {
   return (
-    <section>
+    <section className="text-blue-950">
       <NavigationMenu className="container mx-auto px-4 py-8">
-        <NavigationMenuList className="grid grid-cols-2 md:grid-cols-3 gap-4">
+        <NavigationMenuList className="flex flex-wrap justify-center gap-8">
           {categories.map((category) => (
             <NavigationMenuItem key={category} className="text-lg font-bold">
-              <NavigationMenuLink href={`/category/${category}`}>
+              <NavigationMenuLink
+                href={`/category/${category}`}
+                className="hover:underline"
+              >
                 {category}
               </NavigationMenuLink>
             </NavigationMenuItem>

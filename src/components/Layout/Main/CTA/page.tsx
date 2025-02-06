@@ -12,7 +12,7 @@ const cta = {
 
 export function CTA() {
   return (
-    <section className="my-6 bg-blue-500 text-white">
+    <section className="bg-blue-500 text-white">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center py-12">
           <div className="text-center md:text-start py-12 md:max-w-[50%] w-full">

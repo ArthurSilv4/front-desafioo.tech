@@ -15,7 +15,7 @@ interface MainProps {
 export default function Main({ children }: MainProps) {
   return (
     <Latout>
-      <main className="max-w-screen-2xl mx-auto">
+      <main className=" mx-auto">
         <CategoryList />
         <CTA />
         {children}

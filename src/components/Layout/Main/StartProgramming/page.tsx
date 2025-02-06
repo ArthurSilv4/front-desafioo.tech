@@ -15,7 +15,7 @@ const content = {
 
 export function StartProgramming() {
   return (
-    <section className="min-h-screen py-24 flex items-center ">
+    <section className="min-h-screen py-24 flex items-center bg-blue-500 text-white">
       <div className="container mx-auto px-4">
         <div className=" md:flex md:justify-between md:items-center">
           <div className="md:max-w-[60%]">

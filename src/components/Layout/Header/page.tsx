@@ -25,12 +25,12 @@ export function Header() {
     <>
       <NavigationMenuItem>
         <Link href="/#faq" legacyBehavior passHref scroll={true}>
-          <NavigationMenuLink>COMO FUNCIONA</NavigationMenuLink>
+          <NavigationMenuLink className="hover:underline">COMO FUNCIONA</NavigationMenuLink>
         </Link>
       </NavigationMenuItem>
       <NavigationMenuItem>
         <Link href="/apoiar" legacyBehavior passHref>
-          <NavigationMenuLink>APOIAR</NavigationMenuLink>
+          <NavigationMenuLink className="hover:underline">APOIAR</NavigationMenuLink>
         </Link>
       </NavigationMenuItem>
       <NavigationMenuItem>
@@ -40,14 +40,14 @@ export function Header() {
           passHref
           target="_blank"
         >
-          <NavigationMenuLink>FEEDBACK</NavigationMenuLink>
+          <NavigationMenuLink className="hover:underline">FEEDBACK</NavigationMenuLink>
         </Link>
       </NavigationMenuItem>
     </>
   );
 
   return (
-    <header>
+    <header className="bg-blue-500 text-white">
       <div className="container mx-auto flex items-center justify-between p-4 md:p-8">
         <div>
           <Link href="/" className="flex items-center gap-2">
@@ -65,7 +65,7 @@ export function Header() {
           </NavigationMenu>
 
           <div>
-            <Button variant="outline" asChild>
+            <Button variant="outline" asChild className="text-black">
               <Link href="/singIn">Entrar</Link>
             </Button>
           </div>
@@ -89,7 +89,7 @@ export function Header() {
                     <NavItems />
                   </NavigationMenuList>
                 </NavigationMenu>
-                <Button variant="outline" asChild className="w-full">
+                <Button variant="outline" asChild className="w-full text-black">
                   <Link href="/singIn" onClick={() => setIsOpen(false)}>
                     Entrar
                   </Link>

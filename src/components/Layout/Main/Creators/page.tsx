@@ -46,14 +46,14 @@ export function Creators() {
             const size = getSize(creator.challenges);
             return (
               <Link href={`cretors/${creator.id}`}>
-                <div key={index} className="flex flex-col items-center border border-dotted p-2 rounded-xl border-blue-500 bg-blue-200">
+                <div key={index} className="min-w-56 flex flex-col items-center border border-white rounded-lg p-1 bg-blue-400 text-white">
                   <h3
                     className={`${fontSizeClasses[size]} font-semibold text-center`}
                   >
                     {creator.name}
                   </h3>
-                  <p>
-                    <span className="text-gray-700 font-semibold">
+                  <p className="font-semibold">
+                    <span>
                       {creator.challenges}
                     </span>{" "}
                     desafios

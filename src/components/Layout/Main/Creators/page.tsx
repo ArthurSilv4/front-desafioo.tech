@@ -1,119 +1,15 @@
-import Image from "next/image";
+import Link from "next/link";
 
 const creators = [
   {
+    id: 1,
     name: "Ana Silva",
-    image: "/eu.png",
-    description: "Artista Digital",
     challenges: 15,
   },
   {
+    id: 2,
     name: "Carlos Oliveira",
-    image: "/eu.png",
-    description: "Fotógrafo",
     challenges: 8,
-  },
-  {
-    name: "Mariana Santos",
-    image: "/eu.png",
-    description: "Designer Gráfica",
-    challenges: 20,
-  },
-  {
-    name: "Mariana Santos",
-    image: "/eu.png",
-    description: "Designer Gráfica",
-    challenges: 20,
-  },
-  {
-    name: "Mariana Santos",
-    image: "/eu.png",
-    description: "Designer Gráfica",
-    challenges: 20,
-  },
-  {
-    name: "Mariana Santos",
-    image: "/eu.png",
-    description: "Designer Gráfica",
-    challenges: 20,
-  },
-  {
-    name: "Mariana Santos",
-    image: "/eu.png",
-    description: "Designer Gráfica",
-    challenges: 20,
-  },
-  {
-    name: "Mariana Santos",
-    image: "/eu.png",
-    description: "Designer Gráfica",
-    challenges: 20,
-  },
-  {
-    name: "Mariana Santos",
-    image: "/eu.png",
-    description: "Designer Gráfica",
-    challenges: 20,
-  },
-  {
-    name: "Mariana Santos",
-    image: "/eu.png",
-    description: "Designer Gráfica",
-    challenges: 20,
-  },
-  {
-    name: "Mariana Santos",
-    image: "/eu.png",
-    description: "Professor universitário",
-    challenges: 20,
-  },
-  {
-    name: "Mariana Santos",
-    image: "/eu.png",
-    description: "Designer Gráfica",
-    challenges: 20,
-  },
-  {
-    name: "Mariana Santos",
-    image: "/eu.png",
-    description: "Designer Gráfica",
-    challenges: 20,
-  },
-  {
-    name: "Pedro Costa",
-    image: "/eu.png",
-    description: "Videomaker",
-    challenges: 12,
-  },
-  {
-    name: "Luísa Ferreira",
-    image: "/eu.png",
-    description: "Ilustradora",
-    challenges: 18,
-  },
-  {
-    name: "Rafael Mendes",
-    image: "/eu.png",
-    description: "Músico",
-    challenges: 6,
-  },
-  {
-    name: "Rafael Mendes",
-    image: "/eu.png",
-    description: "Músico",
-    challenges: 6,
-  },
-  {
-    name: "Rafael Mendes",
-    image: "/eu.png",
-    description: "Músico",
-    challenges: 6,
-  },
-  {
-    name: "Rafael Mendes",
-    image: "/eu.png",
-    description: "professor universitario",
-    challenges: 1,
   },
 ];
 
@@ -149,32 +45,21 @@ export function Creators() {
           {creators.map((creator, index) => {
             const size = getSize(creator.challenges);
             return (
-              <div key={index} className="flex flex-col items-center">
-                <div
-                  className={`${sizeClasses[size]} relative rounded-full overflow-hidden mb-3 transition-transform duration-300 hover:scale-105`}
-                >
-                  <Image
-                    src={creator.image}
-                    alt={creator.name}
-                    layout="fill"
-                    objectFit="cover"
-                  />
+              <Link href={`cretors/${creator.id}`}>
+                <div key={index} className="flex flex-col items-center border border-dotted p-2 rounded-xl border-blue-500 bg-blue-200">
+                  <h3
+                    className={`${fontSizeClasses[size]} font-semibold text-center`}
+                  >
+                    {creator.name}
+                  </h3>
+                  <p>
+                    <span className="text-gray-700 font-semibold">
+                      {creator.challenges}
+                    </span>{" "}
+                    desafios
+                  </p>
                 </div>
-                <h3
-                  className={`${fontSizeClasses[size]} font-semibold text-center`}
-                >
-                  {creator.name}
-                </h3>
-                <p className="text-xs font-semibold text-gray-600 text-center">
-                  {creator.description}
-                </p>
-                <p>
-                  <span className="text-gray-700 font-semibold">
-                    {creator.challenges}
-                  </span>{" "}
-                  desafios
-                </p>
-              </div>
+              </Link>
             );
           })}
         </div>

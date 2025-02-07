@@ -46,7 +46,7 @@ export default function SignIn() {
   }
 
   return (
-    <main className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
+    <main className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-r from-blue-500 to-blue-700">
       <Card className="w-full max-w-sm">
         <CardHeader className="space-y-1">
           <CardTitle className="text-2xl text-center flex items-center justify-center gap-2">

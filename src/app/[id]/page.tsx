@@ -22,8 +22,7 @@ import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
-import Image from "next/image";
-import { Star, Users } from "lucide-react";
+import { Users } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 
 const challenge = {
@@ -61,7 +60,7 @@ export default function ChallengeId() {
 
   return (
     <Main>
-      <section className="min-h-screen">
+      <section className="min-h-screen ">
         <Separator className="h-[1px] w-full bg-gray-300 " />
         <div className="container mx-auto p-4">
           <div className="flex justify-between gap-4 flex-col items-start lg:flex-row">
@@ -137,25 +136,13 @@ export default function ChallengeId() {
                 </Card>
               </div>
 
-              <div className="flex flex-col items-center mt-8 bg-blue-500 p-16 rounded-xl text-white">
-                <span className="font-bold text-xl lg:text-3xl">
+              <div className="flex flex-col items-center mt-8 p-8 text-white bg-gradient-to-r from-blue-700 to-blue-900 rounded-lg">
+                <span className="font-bold text-xl lg:text-2xl">
                   Desafio Criado Por
                 </span>
-                <div className="mt-4 flex flex-col items-center">
-                  <Image
-                    src="/eu.png"
-                    alt="author"
-                    width={100}
-                    height={100}
-                    className="rounded-full"
-                  />
-                  <div className="flex items-center gap-1 mt-2">
-                    <span className="text-xl font-semibold ">
-                      {challenge.author}
-                    </span>
-                    <Star size={20} color="white" />
-                  </div>
-                </div>
+                <span className="font-bold text-xl lg:text-3xl">
+                  {challenge.author}
+                </span>
               </div>
             </div>
           </div>

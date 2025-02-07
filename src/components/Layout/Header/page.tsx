@@ -25,14 +25,14 @@ export function Header() {
     <>
       <NavigationMenuItem>
         <Link href="/#faq" legacyBehavior passHref scroll={true}>
-          <NavigationMenuLink className="hover:underline">
+          <NavigationMenuLink className="hover:underline font-bold">
             COMO FUNCIONA
           </NavigationMenuLink>
         </Link>
       </NavigationMenuItem>
       <NavigationMenuItem>
         <Link href="/apoiar" legacyBehavior passHref>
-          <NavigationMenuLink className="hover:underline">
+          <NavigationMenuLink className="hover:underline font-bold">
             APOIAR
           </NavigationMenuLink>
         </Link>
@@ -44,7 +44,7 @@ export function Header() {
           passHref
           target="_blank"
         >
-          <NavigationMenuLink className="hover:underline">
+          <NavigationMenuLink className="hover:underline font-bold">
             FEEDBACK
           </NavigationMenuLink>
         </Link>

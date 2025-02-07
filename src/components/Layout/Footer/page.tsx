@@ -41,7 +41,7 @@ export function Footer() {
   }
 
   return (
-    <footer className="bg-blue-500 text-white">
+    <footer className="bg-gradient-to-r from-blue-500 to-blue-700 text-white">
       <div className="container mx-auto px-4 py-8 md:py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="md:col-span-2">
@@ -80,12 +80,16 @@ export function Footer() {
             <NavigationMenuList className="flex flex-col items-start space-y-2">
               <NavigationMenuItem>
                 <Link href="/#faq" legacyBehavior passHref>
-                  <NavigationMenuLink className="hover:underline">Como funciona</NavigationMenuLink>
+                  <NavigationMenuLink className="hover:underline">
+                    Como funciona
+                  </NavigationMenuLink>
                 </Link>
               </NavigationMenuItem>
               <NavigationMenuItem>
                 <Link href="/apoiar" legacyBehavior passHref>
-                  <NavigationMenuLink className="hover:underline">Apoiar </NavigationMenuLink>
+                  <NavigationMenuLink className="hover:underline">
+                    Apoiar{" "}
+                  </NavigationMenuLink>
                 </Link>
               </NavigationMenuItem>
               <NavigationMenuItem>
@@ -95,12 +99,17 @@ export function Footer() {
                   passHref
                   target="_blank"
                 >
-                  <NavigationMenuLink className="hover:underline">Feedback</NavigationMenuLink>
+                  <NavigationMenuLink className="hover:underline">
+                    Feedback
+                  </NavigationMenuLink>
                 </Link>
               </NavigationMenuItem>
               <NavigationMenuItem>
                 <Link href="/termos" legacyBehavior passHref>
-                  <NavigationMenuLink className="hover:underline"> Termos de Uso</NavigationMenuLink>
+                  <NavigationMenuLink className="hover:underline">
+                    {" "}
+                    Termos de Uso
+                  </NavigationMenuLink>
                 </Link>
               </NavigationMenuItem>
               <NavigationMenuItem>

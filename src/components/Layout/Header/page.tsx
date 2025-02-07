@@ -53,7 +53,7 @@ export function Header() {
   );
 
   return (
-    <header className="bg-blue-500 text-white">
+    <header className="bg-gradient-to-r from-blue-500 to-blue-700 text-white">
       <div className="container mx-auto flex items-center justify-between p-4 md:p-8">
         <div>
           <Link href="/" className="flex items-center gap-2">

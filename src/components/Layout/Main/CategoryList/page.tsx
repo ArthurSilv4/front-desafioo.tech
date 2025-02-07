@@ -16,7 +16,7 @@ const categories = [
 
 export function CategoryList() {
   return (
-    <section className="text-blue-950">
+    <section className="text-white bg-gradient-to-r from-blue-700 to-blue-900">
       <NavigationMenu className="container mx-auto px-4 py-8">
         <NavigationMenuList className="flex flex-wrap justify-center gap-8">
           {categories.map((category) => (

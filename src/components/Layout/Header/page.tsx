@@ -25,12 +25,16 @@ export function Header() {
     <>
       <NavigationMenuItem>
         <Link href="/#faq" legacyBehavior passHref scroll={true}>
-          <NavigationMenuLink className="hover:underline">COMO FUNCIONA</NavigationMenuLink>
+          <NavigationMenuLink className="hover:underline">
+            COMO FUNCIONA
+          </NavigationMenuLink>
         </Link>
       </NavigationMenuItem>
       <NavigationMenuItem>
         <Link href="/apoiar" legacyBehavior passHref>
-          <NavigationMenuLink className="hover:underline">APOIAR</NavigationMenuLink>
+          <NavigationMenuLink className="hover:underline">
+            APOIAR
+          </NavigationMenuLink>
         </Link>
       </NavigationMenuItem>
       <NavigationMenuItem>
@@ -40,7 +44,9 @@ export function Header() {
           passHref
           target="_blank"
         >
-          <NavigationMenuLink className="hover:underline">FEEDBACK</NavigationMenuLink>
+          <NavigationMenuLink className="hover:underline">
+            FEEDBACK
+          </NavigationMenuLink>
         </Link>
       </NavigationMenuItem>
     </>
@@ -65,7 +71,7 @@ export function Header() {
           </NavigationMenu>
 
           <div>
-            <Button variant="outline" asChild className="text-black">
+            <Button asChild>
               <Link href="/singIn">Entrar</Link>
             </Button>
           </div>
@@ -89,7 +95,7 @@ export function Header() {
                     <NavItems />
                   </NavigationMenuList>
                 </NavigationMenu>
-                <Button variant="outline" asChild className="w-full text-black">
+                <Button asChild className="w-full">
                   <Link href="/singIn" onClick={() => setIsOpen(false)}>
                     Entrar
                   </Link>

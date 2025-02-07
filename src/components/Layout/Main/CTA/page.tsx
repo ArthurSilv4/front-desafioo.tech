@@ -6,8 +6,8 @@ const cta = {
   subTitle: "Desafie-se!",
   title: "Desafios de programação",
   description:
-    "Participe dos nossos desafios e melhore suas habilidades. lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet",
-  button: "Iniciar Desafio",
+    "Desafie-se com nossos projetos de programação e construa um portfólio impressionante! Participe de desafios que vão desde o básico até o avançado, ganhe experiência prática e mostre suas habilidades no seu portfólio. Vamos começar?",
+  button: "Iniciar Desafio Agora",
 };
 
 export function CTA() {

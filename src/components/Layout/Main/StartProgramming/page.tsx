@@ -1,4 +1,3 @@
-import Image from "next/image";
 import ReactMarkdown from "react-markdown";
 
 const content = {
@@ -8,7 +7,7 @@ const content = {
   paragraph2:
     "A prática é o que vai te fazer evoluir. Não perca tempo apenas estudando teoria. Comece criando projetos reais. Crie um site simples, uma calculadora ou até mesmo um bot. O importante é colocar a mão na massa. Isso não só vai te ajudar a aprender de verdade, mas também vai te dar algo concreto para mostrar no seu portfólio.",
   paragraph3:
-    "Estudar é essencial. Pesquise tutoriais, faça cursos online (como os do freeCodeCamp ou Codecademy), e resolva problemas no HackerRank ou LeetCode. Concentre-se em aprender os fundamentos de programação, como lógica, estruturas de dados e algoritmos, porque essas habilidades são o alicerce para qualquer tipo de desenvolvimento. Aprofundar-se nesses temas vai te diferenciar de outros iniciantes.",
+    "Estudar é essencial. Pesquise tutoriais, faça cursos online e resolva problemas. Concentre-se em aprender os fundamentos de programação, como lógica, estruturas de dados e algoritmos, porque essas habilidades são o alicerce para qualquer tipo de desenvolvimento. Aprofundar-se nesses temas vai te diferenciar de outros iniciantes.",
   paragraph4:
     "Por fim, para manter seu portfólio sempre atualizado, compartilhe seus projetos no GitHub e mostre-os em um site pessoal. Documente bem seu código e escreva sobre os desafios que você superou em cada projeto. Isso não só vai te ajudar a fixar o conhecimento, mas também vai te dar visibilidade para futuros empregadores ou clientes. E lembre-se: a tecnologia muda rapidamente, então nunca pare de aprender!",
 };

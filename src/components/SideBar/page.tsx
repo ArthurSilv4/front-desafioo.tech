@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, PlusCircle, Settings, User, Sword } from "lucide-react";
+import { Home, PlusCircle, User, Sword } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -17,7 +17,6 @@ import { MessageCircle, Heart, LogOut } from "lucide-react";
 const menuItemsContent = [
   { name: "Home", icon: Home, href: "/dashboard" },
   { name: "Criar Desafio", icon: PlusCircle, href: "/dashboard/newChallenge" },
-  { name: "Configurações", icon: Settings, href: "/dashboard/settings" },
   { name: "Perfil", icon: User, href: "/dashboard/profile" },
 ];
 

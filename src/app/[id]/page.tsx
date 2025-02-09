@@ -24,6 +24,8 @@ import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Users } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
+import { Checkbox } from "@/components/ui/checkbox";
+import Link from "next/link";
 
 const challenge = {
   id: 1,
@@ -41,6 +43,9 @@ const formSchema = z.object({
   email: z.string().email({
     message: "Por favor, insira um e-mail válido.",
   }),
+  terms: z.boolean().refine((val) => val === true, {
+    message: "Você deve aceitar os termos e condições.",
+  }),
 });
 
 export default function ChallengeId() {
@@ -51,6 +56,7 @@ export default function ChallengeId() {
     defaultValues: {
       name: "",
       email: "",
+      terms: false,
     },
   });
 
@@ -127,6 +133,33 @@ export default function ChallengeId() {
                             </FormItem>
                           )}
                         />
+
+                        <FormField
+                          control={form.control}
+                          name="terms"
+                          render={({ field }) => (
+                            <FormItem>
+                              <Label>
+                                Aceito os{" "}
+                                <Link
+                                  href="/TermsofUse"
+                                  className="text-blue-500"
+                                >
+                                  termos e condições
+                                </Link>
+                              </Label>
+                              <FormControl>
+                                <Checkbox
+                                  className="mx-2"
+                                  checked={field.value}
+                                  onCheckedChange={field.onChange}
+                                />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+
                         <Button type="submit" className="w-full mt-4">
                           Começar
                         </Button>

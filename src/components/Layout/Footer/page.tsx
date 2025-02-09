@@ -109,7 +109,7 @@ export function Footer() {
                 </Link>
               </NavigationMenuItem>
               <NavigationMenuItem>
-                <Link href="/termos" legacyBehavior passHref>
+                <Link href="/TermsofUse" legacyBehavior passHref>
                   <NavigationMenuLink className="hover:underline">
                     {" "}
                     Termos de Uso
@@ -117,7 +117,7 @@ export function Footer() {
                 </Link>
               </NavigationMenuItem>
               <NavigationMenuItem>
-                <Link href="/privacidade" legacyBehavior passHref>
+                <Link href="/PrivacyPolicy" legacyBehavior passHref>
                   <NavigationMenuLink className="hover:underline">
                     Política de Privacidade
                   </NavigationMenuLink>

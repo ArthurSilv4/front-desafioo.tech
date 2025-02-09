@@ -20,7 +20,7 @@ export default function Home() {
 
   return (
     <Main>
-      <section className="min-h-screen">
+      <section className="min-h-screen" id="challenge">
         <div className="container mx-auto p-4">
           <h1 className="text-3xl font-bold">Desafios</h1>
           <Separator className="bg-gray-300 h-[1px] my-4" />

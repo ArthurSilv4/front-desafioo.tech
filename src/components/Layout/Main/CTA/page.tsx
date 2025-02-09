@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import Image from "next/image";
 import Link from "next/link";
 
 const cta = {
@@ -21,7 +20,7 @@ export function CTA() {
               <span> {cta.title}</span>
             </h1>
             <p className="text-lg mb-8">{cta.description}</p>
-            <Link href={"/"}>
+            <Link href={"#challenge"}>
               <Button className="font-semibold py-2 px-4 rounded">
                 {cta.button}
               </Button>

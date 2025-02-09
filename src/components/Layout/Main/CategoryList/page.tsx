@@ -21,10 +21,7 @@ export function CategoryList() {
         <NavigationMenuList className="flex flex-wrap justify-center gap-8">
           {categories.map((category) => (
             <NavigationMenuItem key={category} className="text-lg font-bold">
-              <NavigationMenuLink
-                href={`/category/${category}`}
-                className="hover:underline"
-              >
+              <NavigationMenuLink href={``} className="hover:underline">
                 {category}
               </NavigationMenuLink>
             </NavigationMenuItem>

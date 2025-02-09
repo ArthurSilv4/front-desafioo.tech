@@ -86,7 +86,11 @@ export function Footer() {
                 </Link>
               </NavigationMenuItem>
               <NavigationMenuItem>
-                <Link href="/apoiar" legacyBehavior passHref>
+                <Link
+                  href="https://apoia.se/desafiootech"
+                  legacyBehavior
+                  passHref
+                >
                   <NavigationMenuLink className="hover:underline">
                     Apoiar{" "}
                   </NavigationMenuLink>

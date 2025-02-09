@@ -31,7 +31,7 @@ export function Header() {
         </Link>
       </NavigationMenuItem>
       <NavigationMenuItem>
-        <Link href="/apoiar" legacyBehavior passHref>
+        <Link href="https://apoia.se/desafiootech" legacyBehavior passHref>
           <NavigationMenuLink className="hover:underline font-bold">
             APOIAR
           </NavigationMenuLink>

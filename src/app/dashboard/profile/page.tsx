@@ -89,6 +89,7 @@ export default function Profile() {
                       <Input
                         placeholder="email@exemplo.com"
                         type="text"
+                        disabled
                         {...field}
                       />
                     </FormControl>

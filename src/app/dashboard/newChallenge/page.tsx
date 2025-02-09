@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   FormControl,
   FormDescription,
@@ -96,207 +97,214 @@ export default function NewChallenge() {
   }
 
   return (
-    <div>
-      <div className="mx-auto p-4">
-        <div className="flex items-center gap-2">
-          <ShieldPlus />
-          <h1 className="text-2xl font-bold md:text-4xl">
-            Publicar Novo Desafio
-          </h1>
-        </div>
-        <Separator className="h-[1px] bg-gray-300 my-2" />
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center">
+      <div className="mx-auto p-4 max-w-5xl">
+        <Card className="w-full">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <ShieldPlus />
+              <h1 className="text-2xl font-bold md:text-4xl">
+                Publicar Novo Desafio
+              </h1>{" "}
+            </CardTitle>
+          </CardHeader>
 
-        <FormProvider {...form}>
-          <form
-            onSubmit={form.handleSubmit(onSubmit)}
-            className="flex flex-col space-y-2"
-          >
-            <FormField
-              control={form.control}
-              name="title"
-              render={({ field }) => (
-                <FormItem>
-                  <Label>Título*</Label>
-                  <FormMessage />
-                  <FormControl>
-                    <Input
-                      placeholder="Título Do Desafio"
-                      type="text"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormDescription>
-                    Escreva um título para o seu desafio.
-                  </FormDescription>
-                </FormItem>
-              )}
-            />
+          <Separator className="h-[1px] bg-gray-300 my-2" />
 
-            <FormField
-              control={form.control}
-              name="description"
-              render={({ field }) => (
-                <FormItem>
-                  <Label>Descrição Do Desafio*</Label>
-                  <FormMessage />
-                  <FormControl>
-                    <Textarea {...field} className="min-h-64" />
-                  </FormControl>
-                  <FormDescription>
-                    Escreva uma descrição para o seu desafio.
-                  </FormDescription>
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="dificulty"
-              render={({ field }) => (
-                <FormItem>
-                  <Label>Dificuldade do desafio*</Label>
-                  <FormMessage />
-                  <FormControl>
-                    <ToggleGroup
-                      type="single"
-                      value={field.value}
-                      onValueChange={field.onChange}
-                      className="flex gap-2"
-                    >
-                      <ToggleGroupItem
-                        value="Facil"
-                        aria-label="Toggle bold"
-                        className={
-                          field.value === "Facil"
-                            ? "bg-blue-500 text-white p-2 rounded-xl"
-                            : ""
-                        }
-                      >
-                        Facil
-                      </ToggleGroupItem>
-                      <ToggleGroupItem
-                        value="Media"
-                        className={
-                          field.value === "Media"
-                            ? "bg-blue-500 text-white p-2 rounded-xl"
-                            : ""
-                        }
-                      >
-                        Media
-                      </ToggleGroupItem>
-                      <ToggleGroupItem
-                        value="Dificil"
-                        className={
-                          field.value === "Dificil"
-                            ? "bg-blue-500 text-white p-2 rounded-xl"
-                            : ""
-                        }
-                      >
-                        Dificil
-                      </ToggleGroupItem>
-                    </ToggleGroup>
-                  </FormControl>
-                  <FormDescription>
-                    Escolha a dificuldade do seu desafio.
-                  </FormDescription>
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="category"
-              render={({ field }) => (
-                <FormItem>
-                  <Label>Categoria do desafio*</Label>
-                  <FormMessage />
-                  <FormControl>
-                    <ToggleGroup
-                      type="multiple"
-                      value={field.value}
-                      onValueChange={field.onChange}
-                      className="flex flex-wrap gap-2"
-                    >
-                      {categorys.map((category) => (
-                        <ToggleGroupItem
-                          key={category}
-                          value={category}
-                          className={
-                            field.value.includes(category)
-                              ? "bg-blue-500 text-white p-2 rounded-xl"
-                              : ""
-                          }
-                        >
-                          {category}
-                        </ToggleGroupItem>
-                      ))}
-                    </ToggleGroup>
-                  </FormControl>
-                  <FormDescription>
-                    Escolha a categoria do desafio.
-                  </FormDescription>
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="links"
-              render={({ field }) => (
-                <FormItem>
-                  <Label>Adicione links de apoio</Label>
-                  <FormMessage />
-
-                  {(field.value || []).map((link, index) => (
-                    <div key={index} className="flex items-center gap-2">
+          <CardContent className="space-y-4">
+            <FormProvider {...form}>
+              <form
+                onSubmit={form.handleSubmit(onSubmit)}
+                className="flex flex-col space-y-2"
+              >
+                <FormField
+                  control={form.control}
+                  name="title"
+                  render={({ field }) => (
+                    <FormItem>
+                      <Label>Título*</Label>
+                      <FormMessage />
                       <FormControl>
                         <Input
-                          placeholder="Link"
-                          type="url"
-                          value={link}
-                          onChange={(e) => {
-                            const newLinks = [...(field.value || [])];
-                            newLinks[index] = e.target.value;
-                            field.onChange(newLinks);
-                          }}
+                          placeholder="Título Do Desafio"
+                          type="text"
+                          {...field}
                         />
                       </FormControl>
-                      <Button
-                        type="button"
-                        onClick={() => {
-                          const newLinks = (field.value || []).filter(
-                            (_, i) => i !== index
-                          );
-                          field.onChange(newLinks);
-                        }}
-                      >
-                        Remover
-                      </Button>
-                    </div>
-                  ))}
-
-                  {field.value && field.value.length < 5 && (
-                    <Button
-                      className="mx-2"
-                      type="button"
-                      onClick={() =>
-                        field.onChange([...(field.value || []), ""])
-                      }
-                    >
-                      Adicionar Link
-                    </Button>
+                      <FormDescription>
+                        Escreva um título para o seu desafio.
+                      </FormDescription>
+                    </FormItem>
                   )}
+                />
 
-                  <FormDescription>
-                    Você pode adicionar até 5 links de apoio.
-                  </FormDescription>
-                </FormItem>
-              )}
-            />
+                <FormField
+                  control={form.control}
+                  name="description"
+                  render={({ field }) => (
+                    <FormItem>
+                      <Label>Descrição Do Desafio*</Label>
+                      <FormMessage />
+                      <FormControl>
+                        <Textarea {...field} className="min-h-64" />
+                      </FormControl>
+                      <FormDescription>
+                        Escreva uma descrição para o seu desafio.
+                      </FormDescription>
+                    </FormItem>
+                  )}
+                />
 
-            <Button type="submit">Criar Desafio</Button>
-          </form>
-        </FormProvider>
+                <FormField
+                  control={form.control}
+                  name="dificulty"
+                  render={({ field }) => (
+                    <FormItem>
+                      <Label>Dificuldade do desafio*</Label>
+                      <FormMessage />
+                      <FormControl>
+                        <ToggleGroup
+                          type="single"
+                          value={field.value}
+                          onValueChange={field.onChange}
+                          className="flex gap-2"
+                        >
+                          <ToggleGroupItem
+                            value="Facil"
+                            aria-label="Toggle bold"
+                            className={
+                              field.value === "Facil"
+                                ? "bg-blue-500 text-white p-2 rounded-xl"
+                                : ""
+                            }
+                          >
+                            Facil
+                          </ToggleGroupItem>
+                          <ToggleGroupItem
+                            value="Media"
+                            className={
+                              field.value === "Media"
+                                ? "bg-blue-500 text-white p-2 rounded-xl"
+                                : ""
+                            }
+                          >
+                            Media
+                          </ToggleGroupItem>
+                          <ToggleGroupItem
+                            value="Dificil"
+                            className={
+                              field.value === "Dificil"
+                                ? "bg-blue-500 text-white p-2 rounded-xl"
+                                : ""
+                            }
+                          >
+                            Dificil
+                          </ToggleGroupItem>
+                        </ToggleGroup>
+                      </FormControl>
+                      <FormDescription>
+                        Escolha a dificuldade do seu desafio.
+                      </FormDescription>
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="category"
+                  render={({ field }) => (
+                    <FormItem>
+                      <Label>Categoria do desafio*</Label>
+                      <FormMessage />
+                      <FormControl>
+                        <ToggleGroup
+                          type="multiple"
+                          value={field.value}
+                          onValueChange={field.onChange}
+                          className="flex flex-wrap gap-2"
+                        >
+                          {categorys.map((category) => (
+                            <ToggleGroupItem
+                              key={category}
+                              value={category}
+                              className={
+                                field.value.includes(category)
+                                  ? "bg-blue-500 text-white p-2 rounded-xl"
+                                  : ""
+                              }
+                            >
+                              {category}
+                            </ToggleGroupItem>
+                          ))}
+                        </ToggleGroup>
+                      </FormControl>
+                      <FormDescription>
+                        Escolha a categoria do desafio.
+                      </FormDescription>
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="links"
+                  render={({ field }) => (
+                    <FormItem>
+                      <Label>Adicione links de apoio</Label>
+                      <FormMessage />
+
+                      {(field.value || []).map((link, index) => (
+                        <div key={index} className="flex items-center gap-2">
+                          <FormControl>
+                            <Input
+                              placeholder="Link"
+                              type="url"
+                              value={link}
+                              onChange={(e) => {
+                                const newLinks = [...(field.value || [])];
+                                newLinks[index] = e.target.value;
+                                field.onChange(newLinks);
+                              }}
+                            />
+                          </FormControl>
+                          <Button
+                            type="button"
+                            onClick={() => {
+                              const newLinks = (field.value || []).filter(
+                                (_, i) => i !== index
+                              );
+                              field.onChange(newLinks);
+                            }}
+                          >
+                            Remover
+                          </Button>
+                        </div>
+                      ))}
+
+                      {field.value && field.value.length < 5 && (
+                        <Button
+                          className="mx-2"
+                          type="button"
+                          onClick={() =>
+                            field.onChange([...(field.value || []), ""])
+                          }
+                        >
+                          Adicionar Link
+                        </Button>
+                      )}
+
+                      <FormDescription>
+                        Você pode adicionar até 5 links de apoio.
+                      </FormDescription>
+                    </FormItem>
+                  )}
+                />
+
+                <Button type="submit">Criar Desafio</Button>
+              </form>
+            </FormProvider>
+          </CardContent>
+        </Card>
       </div>
     </div>
   );

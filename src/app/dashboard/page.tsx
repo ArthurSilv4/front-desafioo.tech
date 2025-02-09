@@ -64,7 +64,7 @@ const myChallenges = [
 
 export default function Dashboard() {
   return (
-    <div>
+    <div className="min-h-screen bg-gray-100">
       <div className="mx-auto p-4">
         <div className="flex items-center gap-2">
           <Swords />

@@ -34,12 +34,12 @@ export function AppSideBar() {
   const pathname = usePathname();
 
   return (
-    <Sidebar collapsible="icon">
+    <Sidebar collapsible="icon" >
       <SidebarHeader>
-        <SidebarMenuButton>
+        <SidebarMenuButton className="hover:bg-transparent">
           <Link href="/" className="flex items-center gap-2">
             <Sword color="white" />
-            <span className="text-xl font-bold">Desafioo.Tech</span>
+            <span className="text-xl font-bold hover:text-white">Desafioo.Tech</span>
           </Link>
         </SidebarMenuButton>
       </SidebarHeader>
@@ -65,7 +65,7 @@ export function AppSideBar() {
         <SidebarMenu>
           {menuItemsFooter.map((item) => (
             <SidebarMenuItem key={item.name} className="font-semibold">
-              <SidebarMenuButton asChild>
+              <SidebarMenuButton asChild tooltip={item.name}>
                 <Link href={item.href} className="flex items-center gap-2">
                   <item.icon className="h-5 w-5" />
                   <span>{item.name}</span>
@@ -76,9 +76,9 @@ export function AppSideBar() {
           <Separator orientation="horizontal" className="h-[1px] bg-gray-300" />
         </SidebarMenu>
 
-        <SidebarMenuButton className="flex items-center gap-3 cursor-auto">
+        <SidebarMenuButton className="flex items-center gap-3 cursor-auto hover:bg-transparent hover:text-white">
           <span>&copy;</span>
-          <p className="text-xs text-muted-foreground">
+          <p className="text-xs">
             {new Date().getFullYear()} Desafioo.Tech. Todos os direitos
             reservados.
           </p>

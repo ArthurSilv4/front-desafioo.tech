@@ -19,7 +19,7 @@ export function DashboardHeader() {
   }
 
   return (
-    <header>
+    <header className="bg-gradient-to-r from-blue-600 to-blue-700 text-white">
       <div className="p-4">
         <div className="flex gap-4 items-center">
           <Button onClick={toggleSidebar} size={"icon"}>

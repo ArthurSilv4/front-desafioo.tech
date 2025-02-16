@@ -44,6 +44,10 @@ type ChallengeContextType = {
     data: ChallengeResponse[] | undefined;
     isLoading: boolean;
   };
+  useFetchChallengeUser: () => {
+    data: ChallengeResponse[] | undefined;
+    isLoading: boolean;
+  };
   useFetchChallengeById: (id: string) => {
     data: ChallengeResponse | undefined;
     isLoading: boolean;
@@ -77,6 +81,35 @@ const ChallengeProvider = ({ children }: { children: React.ReactNode }) => {
       "challenges",
       async () => {
         const response = await api.get("/Challenge/ListChallenge");
+        return response.data;
+      },
+      {
+        refetchOnWindowFocus: false,
+        staleTime: 1000 * 60,
+
+        onError: (error) => {
+          console.error(error);
+        },
+      }
+    );
+    return { data, isLoading };
+  };
+
+  const useFetchChallengeUser = () => {
+    const token = Cookies.get("token-desafioo.tech");
+    if (!token) {
+      throw new Error("No authentication token found");
+    }
+
+    const { data, isLoading } = useQuery<ChallengeResponse[]>(
+      "challenges",
+      async () => {
+        const response = await api.get("/Challenge/ListChallengeUser", {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
         return response.data;
       },
       {
@@ -188,6 +221,7 @@ const ChallengeProvider = ({ children }: { children: React.ReactNode }) => {
     <ChallengeContext.Provider
       value={{
         useFetchChallenge,
+        useFetchChallengeUser,
         useFetchChallengeById,
         isSuccess,
         resetSuccess,

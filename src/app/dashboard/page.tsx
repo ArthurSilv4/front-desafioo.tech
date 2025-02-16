@@ -1,68 +1,20 @@
+"use client";
+
 import { Card, CardContent } from "@/components/ui/card";
+import { useChallenge } from "@/context/challenges/page";
 import { Separator } from "@radix-ui/react-separator";
-import { Camera, Swords } from "lucide-react";
+import { Camera, Code2Icon, Swords } from "lucide-react";
 import Link from "next/link";
 
-const myChallenges = [
-  {
-    id: 1,
-    title: "Desafio 1",
-    description: "Descrição do desafio 1",
-    starts: 10,
-    icon: <Swords />,
-  },
-  {
-    id: 2,
-    title: "Desafio 2",
-    description: "Descrição do desafio 2",
-    starts: 10,
-    icon: <Swords />,
-  },
-  {
-    id: 3,
-    title: "Desafio 3",
-    description: "Descrição do desafio 3",
-    starts: 10,
-    icon: <Swords />,
-  },
-  {
-    id: 3,
-    title: "Desafio 3",
-    description: "Descrição do desafio 3",
-    starts: 10,
-    icon: <Swords />,
-  },
-  {
-    id: 3,
-    title: "Desafio 3",
-    description: "Descrição do desafio 3",
-    starts: 10,
-    icon: <Swords />,
-  },
-  {
-    id: 3,
-    title: "Desafio 3",
-    description: "Descrição do desafio 3",
-    starts: 10,
-    icon: <Swords />,
-  },
-  {
-    id: 3,
-    title: "Desafio 3",
-    description: "Descrição do desafio 3",
-    starts: 10,
-    icon: <Swords />,
-  },
-  {
-    id: 3,
-    title: "Desafio 3",
-    description: "Descrição do desafio 3",
-    starts: 10,
-    icon: <Swords />,
-  },
-];
-
 export default function Dashboard() {
+  const { useFetchChallengeUser } = useChallenge();
+
+  const myChallenges = useFetchChallengeUser().data;
+
+  if (!myChallenges) {
+    return null;
+  }
+
   return (
     <div className="min-h-screen bg-gray-100">
       <div className="mx-auto p-4">
@@ -79,7 +31,7 @@ export default function Dashboard() {
                 <CardContent className="p-4">
                   <div className="flex items-start gap-3 w-full">
                     <div className="rounded-lg p-2 bg-teal-100">
-                      {challenge.icon}
+                      <Code2Icon />
                     </div>
                     <div className="space-y-1 w-full truncate">
                       <h2 className="text-base font-medium text-blue-950 truncate">

@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -16,6 +15,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { User } from "lucide-react";
+import { useAuth } from "@/context/users/auth/page";
 
 const formSchema = z.object({
   email: z.string().email({ message: "Email inválido" }),
@@ -25,7 +25,7 @@ const formSchema = z.object({
 });
 
 export default function SignIn() {
-  const [isLoading, setIsLoading] = useState(false);
+  const { login, isLoading } = useAuth();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -36,12 +36,10 @@ export default function SignIn() {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    setIsLoading(true);
-    console.log(values);
+    login(values);
   }
 
   async function handleGuestAccess() {
-    setIsLoading(true);
     console.log("Entrando como convidado");
   }
 

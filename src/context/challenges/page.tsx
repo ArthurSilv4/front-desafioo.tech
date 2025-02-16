@@ -12,12 +12,18 @@ type ChallengeResponse = {
   category: string;
   author: string;
   links?: string[];
-  startCount: number;
+  starts: number;
 };
 
 type ChallengeContextType = {
-  data: ChallengeResponse[] | undefined;
-  isLoading: boolean;
+  useFetchChallenge: () => {
+    data: ChallengeResponse[] | undefined;
+    isLoading: boolean;
+  };
+  useFetchChallengeById: (id: string) => {
+    data: ChallengeResponse | undefined;
+    isLoading: boolean;
+  };
 };
 
 const ChallengeContext = createContext<ChallengeContextType | undefined>(
@@ -29,30 +35,57 @@ const api = axios.create({
 });
 
 const ChallengeProvider = ({ children }: { children: React.ReactNode }) => {
-  const { data, isLoading } = useQuery<ChallengeResponse[]>(
-    "challenges",
-    async () => {
-      const response = await api.get("/Challenge/ListChallenge");
-      return response.data;
-    },
-    {
-      refetchOnWindowFocus: false,
-      staleTime: 1000 * 60,
-
-      onError: (error) => {
-        console.error(error);
+  const useFetchChallenge = () => {
+    const { data, isLoading } = useQuery<ChallengeResponse[]>(
+      "challenges",
+      async () => {
+        const response = await api.get("/Challenge/ListChallenge");
+        return response.data;
       },
-    }
-  );
+      {
+        refetchOnWindowFocus: false,
+        staleTime: 1000 * 60,
+
+        onError: (error) => {
+          console.error(error);
+        },
+      }
+    );
+    return { data, isLoading };
+  };
+
+  const useFetchChallengeById = (id: string) => {
+    const { data, isLoading } = useQuery<ChallengeResponse>(
+      ["challenge", id],
+      async () => {
+        const response = await api.get(
+          `/Challenge/ChallengeId?challengeId=${id}`
+        );
+        return response.data;
+      },
+      {
+        refetchOnWindowFocus: false,
+        staleTime: 1000 * 60,
+
+        onError: (error) => {
+          console.error(error);
+        },
+      }
+    );
+
+    return { data, isLoading };
+  };
 
   return (
-    <ChallengeContext.Provider value={{ data, isLoading }}>
+    <ChallengeContext.Provider
+      value={{ useFetchChallenge, useFetchChallengeById }}
+    >
       {children}
     </ChallengeContext.Provider>
   );
 };
 
-const Challenge = () => {
+const useChallenge = () => {
   const context = useContext(ChallengeContext);
   if (context === undefined) {
     throw new Error("useAuth must be used within an AuthProvider");
@@ -60,4 +93,4 @@ const Challenge = () => {
   return context;
 };
 
-export { ChallengeProvider, Challenge };
+export { ChallengeProvider, useChallenge };

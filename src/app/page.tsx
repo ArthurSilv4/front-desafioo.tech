@@ -2,13 +2,15 @@
 
 import Main from "@/components/Layout/Main/page";
 import { Card, CardContent } from "@/components/ui/card";
-import { Challenge } from "@/context/challenges/page";
+import { useChallenge } from "@/context/challenges/page";
 import { Separator } from "@radix-ui/react-separator";
 import { Camera, Code2Icon } from "lucide-react";
 import Link from "next/link";
 
 export default function Home() {
-  const { data: challengeList, isLoading } = Challenge();
+  const { useFetchChallenge } = useChallenge();
+
+  const { data: challengeList, isLoading } = useFetchChallenge();
 
   if (isLoading || !challengeList) {
     return (
@@ -68,8 +70,11 @@ export default function Home() {
                         <div className="flex items-center gap-1 text-gray-500 text-sm">
                           <Camera className="w-4 h-4" />
                           <span className="inline-block">
-                            Mais de 10 pessoas já começaram
-                            {/* Mais de {challenge.startCount} pessoas já começaram */}
+                            {`Mais de ${
+                              challenge.starts === 0
+                                ? Math.floor(Math.random() * 3) + 1
+                                : challenge.starts
+                            } pessoas já começaram`}
                           </span>
                         </div>
                       </div>

@@ -26,15 +26,8 @@ import { Users } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { Checkbox } from "@/components/ui/checkbox";
 import Link from "next/link";
-
-const challenge = {
-  id: 1,
-  title: "Fazer um crud com c#",
-  description:
-    "lorem ipsum dolor sit amet consectetur lorem ipsum dolor sit amet consectetur lorem ipsum dolor sit amet consectetur lorem ipsum dolor sit amet consectetur lorem ipsum dolor sit amet consectetur lorem ipsum dolor sit amet consectetur lorem ipsum dolor sit amet consectetur lorem ipsum dolor sit amet consectetur",
-  author: "Author",
-  starts: 10,
-};
+import { useChallenge } from "@/context/challenges/page";
+import { useParams } from "next/navigation";
 
 const formSchema = z.object({
   name: z.string().nonempty({
@@ -49,7 +42,10 @@ const formSchema = z.object({
 });
 
 export default function ChallengeId() {
-  // const { id } = useParams();
+  const { id } = useParams() as { id: string };
+  const { useFetchChallengeById } = useChallenge();
+
+  const { data: challenge, isLoading } = useFetchChallengeById(id);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -64,6 +60,10 @@ export default function ChallengeId() {
     console.log(values);
   }
 
+  if (!challenge || isLoading) {
+    return console.log("loading");
+  }
+
   return (
     <Main>
       <section className="min-h-screen ">
@@ -72,7 +72,10 @@ export default function ChallengeId() {
           <div className="flex justify-between gap-4 flex-col items-start lg:flex-row">
             <div className="lg:max-w-[50%]">
               <h1 className="text-3xl font-bold">{challenge.title}</h1>
-              <p className="text-justify mt-4">{challenge.description}</p>
+              <div
+                className="text-justify mt-4"
+                dangerouslySetInnerHTML={{ __html: challenge.description }}
+              />
             </div>
             <div className="flex flex-col items-center gap-4 w-full lg:w-fit">
               <div>

@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import Main from "@/components/Layout/Main/page";
 import {
   Card,
@@ -43,7 +43,8 @@ const formSchema = z.object({
 
 export default function ChallengeId() {
   const { id } = useParams() as { id: string };
-  const { useFetchChallengeById } = useChallenge();
+  const { useFetchChallengeById, useStartChallenge, isSuccess, resetSuccess } =
+    useChallenge();
 
   const { data: challenge, isLoading } = useFetchChallengeById(id);
 
@@ -57,8 +58,23 @@ export default function ChallengeId() {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
+    useStartChallenge.mutate({
+      id,
+      name: values.name,
+      email: values.email,
+    });
   }
+
+  useEffect(() => {
+    if (isSuccess) {
+      form.reset({
+        name: "",
+        email: "",
+        terms: false,
+      });
+      resetSuccess();
+    }
+  }, [isSuccess, form, resetSuccess]);
 
   if (!challenge || isLoading) {
     return console.log("loading");

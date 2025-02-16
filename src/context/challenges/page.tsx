@@ -1,8 +1,8 @@
 "use client";
 
-import { createContext, useContext } from "react";
+import { createContext, useContext, useState } from "react";
 import axios from "axios";
-import { useQuery } from "react-query";
+import { useMutation, useQuery } from "react-query";
 
 type ChallengeResponse = {
   id: string;
@@ -15,6 +15,21 @@ type ChallengeResponse = {
   starts: number;
 };
 
+type StartChallengeResponse = {
+  message: string;
+  dto: {
+    name: string;
+    email: string;
+    challenge: ChallengeResponse;
+  };
+};
+
+type StartsChallengeRequest = {
+  id: string;
+  name: string;
+  email: string;
+};
+
 type ChallengeContextType = {
   useFetchChallenge: () => {
     data: ChallengeResponse[] | undefined;
@@ -24,6 +39,12 @@ type ChallengeContextType = {
     data: ChallengeResponse | undefined;
     isLoading: boolean;
   };
+  useStartChallenge: {
+    mutate: (variables: StartsChallengeRequest) => void;
+    isLoading: boolean;
+  };
+  isSuccess: boolean;
+  resetSuccess: () => void;
 };
 
 const ChallengeContext = createContext<ChallengeContextType | undefined>(
@@ -35,6 +56,9 @@ const api = axios.create({
 });
 
 const ChallengeProvider = ({ children }: { children: React.ReactNode }) => {
+  const [isSuccess, setIsSuccess] = useState(false);
+  const resetSuccess = () => setIsSuccess(false);
+
   const useFetchChallenge = () => {
     const { data, isLoading } = useQuery<ChallengeResponse[]>(
       "challenges",
@@ -76,9 +100,45 @@ const ChallengeProvider = ({ children }: { children: React.ReactNode }) => {
     return { data, isLoading };
   };
 
+  const useStartChallenge = useMutation<
+    StartChallengeResponse,
+    Error,
+    StartsChallengeRequest
+  >(
+    async (data) => {
+      const response = await api.post(
+        `/Challenge/StartChallenge?challengeId=${data.id}`,
+        {
+          name: data.name,
+          email: data.email,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      return response.data;
+    },
+    {
+      onSuccess: () => {
+        setIsSuccess(true);
+      },
+      onError: (error) => {
+        console.log(error);
+      },
+    }
+  );
+
   return (
     <ChallengeContext.Provider
-      value={{ useFetchChallenge, useFetchChallengeById }}
+      value={{
+        useFetchChallenge,
+        useFetchChallengeById,
+        isSuccess,
+        resetSuccess,
+        useStartChallenge,
+      }}
     >
       {children}
     </ChallengeContext.Provider>

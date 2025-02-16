@@ -17,13 +17,8 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Label } from "@radix-ui/react-label";
-
-const initialProfileData = {
-  name: "John Doe",
-  email: "email@gmail.com",
-  description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  roles: ["admin", "user"],
-};
+import { useUser } from "@/context/users/page";
+import { useEffect } from "react";
 
 const formSchema = z.object({
   name: z
@@ -41,12 +36,26 @@ const formSchema = z.object({
 });
 
 export default function Profile() {
+  const { data } = useUser();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      ...initialProfileData,
+      name: "",
+      email: "",
+      description: "",
     },
   });
+
+  useEffect(() => {
+    if (data) {
+      form.reset({
+        name: data.name || "",
+        email: data.email || "",
+        description: data.description || "",
+      });
+    }
+  }, [data, form]);
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values);

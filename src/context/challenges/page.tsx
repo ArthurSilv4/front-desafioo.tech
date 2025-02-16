@@ -2,6 +2,7 @@
 
 import { createContext, useContext, useState } from "react";
 import axios from "axios";
+import Cookies from "js-cookie";
 import { useMutation, useQuery } from "react-query";
 
 type ChallengeResponse = {
@@ -30,6 +31,14 @@ type StartsChallengeRequest = {
   email: string;
 };
 
+type CreateChallengeRequest = {
+  title: string;
+  description: string;
+  dificulty: string;
+  category: string[];
+  links?: string[];
+};
+
 type ChallengeContextType = {
   useFetchChallenge: () => {
     data: ChallengeResponse[] | undefined;
@@ -45,6 +54,10 @@ type ChallengeContextType = {
   };
   isSuccess: boolean;
   resetSuccess: () => void;
+  useCreateChallenge: {
+    mutate: (variables: CreateChallengeRequest) => void;
+    isLoading: boolean;
+  };
 };
 
 const ChallengeContext = createContext<ChallengeContextType | undefined>(
@@ -130,6 +143,47 @@ const ChallengeProvider = ({ children }: { children: React.ReactNode }) => {
     }
   );
 
+  const useCreateChallenge = useMutation<
+    ChallengeResponse,
+    Error,
+    CreateChallengeRequest
+  >(
+    async (data) => {
+      const token = Cookies.get("token-desafioo.tech");
+      if (!token) {
+        throw new Error("No authentication token found");
+      }
+
+      const response = await api.post(
+        "/Challenge/CreateNewChallenge",
+        {
+          title: data.title,
+          description: data.description,
+          dificulty: data.dificulty,
+          category: data.category,
+          links: data.links || [],
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      return response.data;
+    },
+    {
+      onSuccess: () => {
+        setIsSuccess(true);
+      },
+      onError: (error) => {
+        console.error("Error creating challenge:", error);
+        setIsSuccess(false);
+      },
+    }
+  );
+
   return (
     <ChallengeContext.Provider
       value={{
@@ -138,6 +192,7 @@ const ChallengeProvider = ({ children }: { children: React.ReactNode }) => {
         isSuccess,
         resetSuccess,
         useStartChallenge,
+        useCreateChallenge,
       }}
     >
       {children}

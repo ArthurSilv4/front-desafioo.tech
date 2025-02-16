@@ -13,9 +13,11 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { Textarea } from "@/components/ui/textarea";
+import { useChallenge } from "@/context/challenges/page";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ToggleGroup, ToggleGroupItem } from "@radix-ui/react-toggle-group";
 import { ShieldPlus } from "lucide-react";
+import { useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -81,6 +83,8 @@ const formSchema = z.object({
 });
 
 export default function NewChallenge() {
+  const { useCreateChallenge, isSuccess, resetSuccess } = useChallenge();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -93,8 +97,27 @@ export default function NewChallenge() {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
+    useCreateChallenge.mutate({
+      title: values.title,
+      description: values.description,
+      dificulty: values.dificulty,
+      category: values.category,
+      links: values.links,
+    });
   }
+
+  useEffect(() => {
+    if (isSuccess) {
+      form.reset({
+        title: "",
+        description: "",
+        dificulty: "Facil",
+        category: [],
+        links: [],
+      });
+      resetSuccess();
+    }
+  }, [isSuccess, form, resetSuccess]);
 
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center">

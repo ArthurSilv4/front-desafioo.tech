@@ -36,7 +36,9 @@ const formSchema = z.object({
 });
 
 export default function Profile() {
-  const { data } = useUser();
+  const { useFetchUser, useUpdateUserName, useUpdateUserDescription } =
+    useUser();
+  const data = useFetchUser().data;
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -59,6 +61,15 @@ export default function Profile() {
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values);
+    useUpdateUserName.mutate({
+      newName: values.name,
+    });
+
+    useUpdateUserDescription.mutate({
+      newDescription: values.description || "",
+    });
+
+    console.log("Atualizado com sucesso");
   }
 
   return (

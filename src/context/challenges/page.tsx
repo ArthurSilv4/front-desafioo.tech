@@ -69,7 +69,7 @@ const ChallengeContext = createContext<ChallengeContextType | undefined>(
 );
 
 const api = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL || "https://localhost:62005/api",
+  baseURL: process.env.NEXT_PUBLIC_API_URL || "https://localhost:53062/api",
 });
 
 const ChallengeProvider = ({ children }: { children: React.ReactNode }) => {
@@ -243,3 +243,4 @@ const useChallenge = () => {
 };
 
 export { ChallengeProvider, useChallenge };
+

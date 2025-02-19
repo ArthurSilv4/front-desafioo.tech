@@ -11,10 +11,10 @@ import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useChallenge } from "@/context/challenges/page";
 import Link from "next/link";
-import { Checkbox } from "@radix-ui/react-checkbox";
 import { Button } from "../ui/button";
 import { z } from "zod";
 import { useEffect } from "react";
+import { Checkbox } from "../ui/checkbox";
 
 type ChallengeIdFormsProps = {
   id: string;
@@ -62,10 +62,6 @@ export function ChallengeIdForms({ id }: ChallengeIdFormsProps) {
       resetSuccess();
     }
   }, [isSuccess, form, resetSuccess]);
-
-  if (useStartChallenge.isLoading) {
-    return <div>Carregando...</div>;
-  }
 
   return (
     <FormProvider {...form}>
@@ -129,9 +125,12 @@ export function ChallengeIdForms({ id }: ChallengeIdFormsProps) {
             </FormItem>
           )}
         />
-
-        <Button type="submit" className="w-full mt-4">
-          Começar
+        <Button
+          type="submit"
+          className="w-full mt-4"
+          disabled={useStartChallenge.isLoading}
+        >
+          {useStartChallenge.isLoading ? "Enviando..." : "Começar"}
         </Button>
       </form>
     </FormProvider>

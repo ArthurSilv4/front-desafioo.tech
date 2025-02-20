@@ -1,18 +1,19 @@
+"use client";
+
+import { useChallenge } from "@/context/challenges/page";
 import { Separator } from "@radix-ui/react-separator";
 import Link from "next/link";
 
-const creators = [
-  {
-    id: 1,
-    name: "Ana Silva",
-  },
-  {
-    id: 2,
-    name: "Carlos Oliveira",
-  },
-];
-
 export function Creators() {
+  const { useFetchAuthorsChallenges } = useChallenge();
+  const { data: creators, isLoading } = useFetchAuthorsChallenges();
+
+  console.log(creators);
+
+  if (isLoading || !creators) {
+    return <p>Carregando...</p>;
+  }
+
   return (
     <section className="py-12 mb-16">
       <div className="container mx-auto px-4">
@@ -24,15 +25,10 @@ export function Creators() {
         <div className="flex flex-wrap justify-center gap-2">
           {creators.map((creator, index) => {
             return (
-              <Link href={`cretors/${creator.id}`}>
-                <div
-                  key={index}
-                  className="min-w-56 flex flex-col items-center"
-                >
-                  <h3
-                    className={"text-2xl font-bold text-center text-blue-900"}
-                  >
-                    {creator.name}
+              <Link key={index} href={``}>
+                <div className="min-w-56 flex flex-col items-center">
+                  <h3 className="text-2xl font-bold text-center text-blue-900">
+                    {creator}
                   </h3>
                 </div>
               </Link>

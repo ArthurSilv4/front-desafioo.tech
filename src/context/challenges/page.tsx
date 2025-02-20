@@ -52,6 +52,10 @@ type ChallengeContextType = {
     data: ChallengeResponse | undefined;
     isLoading: boolean;
   };
+  useFetchAuthorsChallenges: () => {
+    data: [] | undefined;
+    isLoading: boolean;
+  };
   useStartChallenge: {
     mutate: (variables: StartsChallengeRequest) => void;
     isLoading: boolean;
@@ -69,7 +73,7 @@ const ChallengeContext = createContext<ChallengeContextType | undefined>(
 );
 
 const api = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL || "https://localhost:53062/api",
+  baseURL: process.env.NEXT_PUBLIC_API_URL || "https://localhost:55404/api",
 });
 
 const ChallengeProvider = ({ children }: { children: React.ReactNode }) => {
@@ -143,6 +147,25 @@ const ChallengeProvider = ({ children }: { children: React.ReactNode }) => {
       }
     );
 
+    return { data, isLoading };
+  };
+
+  const useFetchAuthorsChallenges = () => {
+    const { data, isLoading } = useQuery<[]>(
+      "AuthorsChallenges",
+      async () => {
+        const response = await api.get("/Challenge/ListAuthorsChallenge");
+        return response.data;
+      },
+      {
+        refetchOnWindowFocus: false,
+        staleTime: 1000 * 60,
+
+        onError: (error) => {
+          console.error(error);
+        },
+      }
+    );
     return { data, isLoading };
   };
 
@@ -223,6 +246,7 @@ const ChallengeProvider = ({ children }: { children: React.ReactNode }) => {
         useFetchChallenge,
         useFetchChallengeUser,
         useFetchChallengeById,
+        useFetchAuthorsChallenges,
         isSuccess,
         resetSuccess,
         useStartChallenge,
@@ -243,4 +267,3 @@ const useChallenge = () => {
 };
 
 export { ChallengeProvider, useChallenge };
-

@@ -13,6 +13,7 @@ import { Separator } from "@/components/ui/separator";
 import { useChallenge } from "@/context/challenges/page";
 import { ChallengeIdForms } from "@/components/Forms/ChallengeIdForms";
 import { Skeleton } from "@/components/ui/skeleton";
+import ReactMarkdown from "react-markdown";
 
 type SectionChallengeIdProps = {
   id: string;
@@ -77,10 +78,9 @@ export function SectionChallengeId({ id }: SectionChallengeIdProps) {
         <div className="flex justify-between gap-4 flex-col items-start lg:flex-row">
           <div className="lg:max-w-[50%]">
             <h1 className="text-3xl font-bold">{challenge.title}</h1>
-            <div
-              className="text-justify mt-4"
-              dangerouslySetInnerHTML={{ __html: challenge.description }}
-            />
+            <div className="text-justify mt-4 markdown-container">
+              <ReactMarkdown>{challenge.description}</ReactMarkdown>
+            </div>
           </div>
           <div className="flex flex-col items-center gap-4 w-full lg:w-fit">
             <div>

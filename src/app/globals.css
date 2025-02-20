@@ -78,5 +78,136 @@
   }
   body {
     @apply bg-background text-foreground;
-  }
+  }  
+}
+
+/* Aplicar estilos gerais à div que contém o conteúdo markdown */
+.markdown-container {
+  font-family: 'Arial', sans-serif;
+  line-height: 1.6;
+}
+
+/* Estilo para Títulos */
+.markdown-container h1 {
+  font-size: 2.2rem; /* Ajuste o tamanho conforme necessário */
+  font-weight: bold;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.markdown-container h2 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+  color: #444;
+}
+
+.markdown-container h3 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+  color: #555;
+}
+
+/* Estilo para Listas */
+.markdown-container ul, .markdown-container ol {
+  margin-left: 2rem;
+  padding-left: 1rem;
+}
+
+.markdown-container li {
+  margin-bottom: 0.5rem;
+  color: #555;
+}
+
+/* Estilo para Links */
+.markdown-container a {
+  color: #007BFF;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.markdown-container a:hover {
+  text-decoration: underline;
+  color: #0056b3;
+}
+
+/* Estilo para Citações */
+.markdown-container blockquote {
+  background-color: #f9f9f9;
+  border-left: 5px solid #ccc;
+  padding: 1rem;
+  margin: 1rem 0;
+  font-style: italic;
+  color: #555;
+}
+
+.markdown-container blockquote p {
+  margin: 0;
+}
+
+/* Estilo para Código em Linha */
+.markdown-container code {
+  background-color: #f0f0f0;
+  color: #d63384;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+/* Estilo para Bloco de Código */
+.markdown-container pre code {
+  background-color: #2e2e2e;
+  color: #f5f5f5;
+  padding: 1rem;
+  border-radius: 4px;
+  overflow-x: auto;
+  display: block;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  font-size: 1rem;
+}
+
+/* Estilo para Tabelas */
+.markdown-container table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.markdown-container th, .markdown-container td {
+  border: 1px solid #ddd;
+  padding: 0.5rem;
+  text-align: left;
+}
+
+.markdown-container th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+  color: #333;
+}
+
+.markdown-container td {
+  color: #555;
+}
+
+/* Estilo para Imagens */
+.markdown-container img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 1rem 0;
+}
+
+/* Estilo para Listas Ordenadas */
+.markdown-container ol {
+  list-style-type: decimal;
+}
+
+.markdown-container ol li {
+  margin-bottom: 0.5rem;
 }

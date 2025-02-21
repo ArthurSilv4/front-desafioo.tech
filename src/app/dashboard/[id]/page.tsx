@@ -96,7 +96,8 @@ const formSchema = z.object({
 export default function DashboardChallengeId() {
   const { id } = useParams() as { id: string };
 
-  const { useEditChallenge, useFetchChallengeById } = useChallenge();
+  const { useEditChallenge, useFetchChallengeById, useDeleteChallenge } =
+    useChallenge();
   const { data } = useFetchChallengeById(id);
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -135,6 +136,10 @@ export default function DashboardChallengeId() {
     });
   }
 
+  function handleDelete() {
+    useDeleteChallenge.mutate({ id });
+  }
+
   if (!data) {
     return <div>Carregando...</div>;
   }
@@ -168,7 +173,9 @@ export default function DashboardChallengeId() {
                       <DialogClose asChild>
                         <Button>Voltar</Button>
                       </DialogClose>
-                      <Button variant="destructive">Deletar</Button>
+                      <Button variant="destructive" onClick={handleDelete}>
+                        Deletar
+                      </Button>
                     </DialogFooter>
                   </DialogContent>
                 </Dialog>

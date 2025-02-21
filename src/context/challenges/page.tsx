@@ -4,6 +4,8 @@ import { createContext, useContext, useState } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { useMutation, useQuery } from "react-query";
+import { useRouter } from "next/navigation";
+import { queryClient } from "@/services/queryClient";
 
 type ChallengeResponse = {
   id: string;
@@ -79,6 +81,11 @@ type ChallengeContextType = {
     mutate: (variables: { id: string } & EditChallengeRequest) => void;
     isLoading: boolean;
   };
+
+  useDeleteChallenge: {
+    mutate: (variables: { id: string }) => void;
+    isLoading: boolean;
+  };
 };
 
 const ChallengeContext = createContext<ChallengeContextType | undefined>(
@@ -92,6 +99,8 @@ const api = axios.create({
 const ChallengeProvider = ({ children }: { children: React.ReactNode }) => {
   const [isSuccess, setIsSuccess] = useState(false);
   const resetSuccess = () => setIsSuccess(false);
+
+  const router = useRouter();
 
   const useFetchChallenge = () => {
     const { data, isLoading } = useQuery<ChallengeResponse[]>(
@@ -293,6 +302,41 @@ const ChallengeProvider = ({ children }: { children: React.ReactNode }) => {
     }
   );
 
+  const useDeleteChallenge = useMutation<
+    ChallengeResponse,
+    Error,
+    { id: string }
+  >(
+    async ({ id }) => {
+      const token = Cookies.get("token-desafioo.tech");
+      if (!token) {
+        throw new Error("No authentication token found");
+      }
+
+      const response = await api.delete(
+        `/Challenge/DeleteChallenge?challengeId=${id}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      return response.data;
+    },
+    {
+      onSuccess: () => {
+        alert("Desafio deletado com sucesso!");
+        router.push("/dashboard");
+        queryClient.invalidateQueries("challenges");
+      },
+      onError: (error) => {
+        console.error("Error deleting challenge:", error);
+      },
+    }
+  );
+
   return (
     <ChallengeContext.Provider
       value={{
@@ -305,6 +349,7 @@ const ChallengeProvider = ({ children }: { children: React.ReactNode }) => {
         useStartChallenge,
         useCreateChallenge,
         useEditChallenge,
+        useDeleteChallenge,
       }}
     >
       {children}

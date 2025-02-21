@@ -39,6 +39,14 @@ type CreateChallengeRequest = {
   links?: string[];
 };
 
+type EditChallengeRequest = {
+  title?: string;
+  description?: string;
+  dificulty?: string;
+  category?: string[];
+  links?: string[];
+};
+
 type ChallengeContextType = {
   useFetchChallenge: () => {
     data: ChallengeResponse[] | undefined;
@@ -66,6 +74,11 @@ type ChallengeContextType = {
     mutate: (variables: CreateChallengeRequest) => void;
     isLoading: boolean;
   };
+
+  useEditChallenge: {
+    mutate: (variables: { id: string } & EditChallengeRequest) => void;
+    isLoading: boolean;
+  };
 };
 
 const ChallengeContext = createContext<ChallengeContextType | undefined>(
@@ -73,7 +86,7 @@ const ChallengeContext = createContext<ChallengeContextType | undefined>(
 );
 
 const api = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL || "https://localhost:55404/api",
+  baseURL: process.env.NEXT_PUBLIC_API_URL || "https://localhost:62747/api",
 });
 
 const ChallengeProvider = ({ children }: { children: React.ReactNode }) => {
@@ -240,6 +253,46 @@ const ChallengeProvider = ({ children }: { children: React.ReactNode }) => {
     }
   );
 
+  const useEditChallenge = useMutation<
+    ChallengeResponse,
+    Error,
+    { id: string } & EditChallengeRequest
+  >(
+    async ({ id, ...data }) => {
+      const token = Cookies.get("token-desafioo.tech");
+      if (!token) {
+        throw new Error("No authentication token found");
+      }
+
+      const response = await api.put(
+        `/Challenge/UpdateChallenge?challengeId=${id}`,
+        {
+          title: data.title,
+          description: data.description,
+          dificulty: data.dificulty,
+          category: data.category,
+          links: data.links,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      return response.data;
+    },
+    {
+      onSuccess: () => {
+        alert("Desafio editado com sucesso!");
+      },
+      onError: (error) => {
+        console.error("Error editing challenge:", error);
+      },
+    }
+  );
+
   return (
     <ChallengeContext.Provider
       value={{
@@ -251,6 +304,7 @@ const ChallengeProvider = ({ children }: { children: React.ReactNode }) => {
         resetSuccess,
         useStartChallenge,
         useCreateChallenge,
+        useEditChallenge,
       }}
     >
       {children}

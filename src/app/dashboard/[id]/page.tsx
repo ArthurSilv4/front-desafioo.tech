@@ -23,9 +23,12 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { Textarea } from "@/components/ui/textarea";
+import { useChallenge } from "@/context/challenges/page";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ToggleGroup, ToggleGroupItem } from "@radix-ui/react-toggle-group";
 import { Pen } from "lucide-react";
+import { useParams } from "next/navigation";
+import { useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -51,14 +54,6 @@ const categorys = [
   "Design UI/UX",
   "Gestão de Projetos",
 ];
-
-const data = {
-  title: "Fazer um crud com c#",
-  description: "lorem",
-  dificulty: "Facil" as "Facil" | "Media" | "Dificil",
-  category: ["Backend"],
-  links: ["https://google.com"],
-};
 
 const formSchema = z.object({
   title: z
@@ -99,15 +94,49 @@ const formSchema = z.object({
 });
 
 export default function DashboardChallengeId() {
+  const { id } = useParams() as { id: string };
+
+  const { useEditChallenge, useFetchChallengeById } = useChallenge();
+  const { data } = useFetchChallengeById(id);
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      ...data,
+      title: data?.title || "",
+      description: data?.description || "",
+      dificulty:
+        (data?.dificulty as "Facil" | "Media" | "Dificil" | undefined) ||
+        "Facil",
+      category: Array.isArray(data?.category) ? data?.category : [],
+      links: data?.links || [],
     },
   });
 
+  useEffect(() => {
+    if (data) {
+      form.reset({
+        title: data.title || "",
+        description: data.description || "",
+        dificulty: (data.dificulty as "Facil" | "Media" | "Dificil") || "Facil",
+        category: Array.isArray(data.category) ? data.category : [],
+        links: data.links || [],
+      });
+    }
+  }, [data, form]);
+
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
+    useEditChallenge.mutate({
+      id,
+      title: values.title,
+      description: values.description,
+      dificulty: values.dificulty,
+      category: values.category,
+      links: values.links,
+    });
+  }
+
+  if (!data) {
+    return <div>Carregando...</div>;
   }
 
   return (
@@ -338,7 +367,13 @@ export default function DashboardChallengeId() {
                   )}
                 />
 
-                <Button type="submit">Salvar</Button>
+                <Button
+                  type="submit"
+                  className="w-full mt-4"
+                  disabled={useEditChallenge.isLoading}
+                >
+                  {useEditChallenge.isLoading ? "Salvando..." : "Salvar"}
+                </Button>
               </form>
             </FormProvider>
           </CardContent>

@@ -1,9 +1,9 @@
 "use client";
 
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { useMutation } from "react-query";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import Cookies from "js-cookie";
 
 type LoginCredentials = {
@@ -25,12 +25,13 @@ type AuthContextType = {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 const api = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL || "https://localhost:62005/api",
+  baseURL: process.env.NEXT_PUBLIC_API_URL || "https://localhost:62747/api",
 });
 
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const router = useRouter();
+  const pathname = usePathname();
 
   const loginMutation = useMutation<LoginResponse, Error, LoginCredentials>(
     async (credentials) => {
@@ -39,9 +40,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     },
     {
       onSuccess: (data) => {
-        Cookies.set("token-desafioo.tech", data.token, {
-          expires: 7,
-        });
+        Cookies.set("token-desafioo.tech", data.token, { expires: 0.33 }); // 8 horas
         setIsAuthenticated(true);
         router.push("/dashboard");
       },
@@ -57,10 +56,32 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   const logout = () => {
-    Cookies.remove("token");
+    Cookies.remove("token-desafioo.tech");
     setIsAuthenticated(false);
-    router.push("/login");
+    router.push("/singIn");
   };
+
+  const checkTokenExpiration = () => {
+    const token = Cookies.get("token-desafioo.tech");
+    if (!token) {
+      logout();
+      return;
+    }
+    const tokenExpiration = JSON.parse(atob(token.split(".")[1])).exp * 1000;
+    if (Date.now() >= tokenExpiration) {
+      logout();
+    }
+  };
+
+  useEffect(() => {
+    if (pathname && pathname.startsWith("/dashboard")) {
+      checkTokenExpiration();
+      const interval = setInterval(() => {
+        checkTokenExpiration();
+      }, 30000); // Verifica a cada 30 segundos
+      return () => clearInterval(interval);
+    }
+  }, [pathname]);
 
   return (
     <AuthContext.Provider

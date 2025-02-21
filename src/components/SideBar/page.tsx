@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, PlusCircle, User, Sword } from "lucide-react";
+import { Home, PlusCircle, User, Sword, Plus } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -19,6 +19,7 @@ const menuItemsContent = [
   { name: "Home", icon: Home, href: "/dashboard" },
   { name: "Criar Desafio", icon: PlusCircle, href: "/dashboard/newChallenge" },
   { name: "Perfil", icon: User, href: "/dashboard/profile" },
+  { name: "Criar Usuario", icon: Plus, href: "/dashboard/newUser" },
 ];
 
 export function AppSideBar() {

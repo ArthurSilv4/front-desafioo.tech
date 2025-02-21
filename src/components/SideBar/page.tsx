@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/sidebar";
 import { Separator } from "@radix-ui/react-separator";
 import { MessageCircle, Heart, LogOut } from "lucide-react";
+import { useAuth } from "@/context/users/auth/page";
 
 const menuItemsContent = [
   { name: "Home", icon: Home, href: "/dashboard" },
@@ -20,26 +21,33 @@ const menuItemsContent = [
   { name: "Perfil", icon: User, href: "/dashboard/profile" },
 ];
 
-const menuItemsFooter = [
-  {
-    name: "FeedBack",
-    icon: MessageCircle,
-    href: "https://forms.gle/PU8eiH8GpPSmPfrA8",
-  },
-  { name: "Apoiar", icon: Heart, href: "/sobre" },
-  { name: "Sair", icon: LogOut, href: "/sair" },
-];
-
 export function AppSideBar() {
+  const { logout } = useAuth();
   const pathname = usePathname();
 
+  function handleLogout() {
+    logout();
+  }
+
+  const menuItemsFooter = [
+    {
+      name: "FeedBack",
+      icon: MessageCircle,
+      href: "https://forms.gle/PU8eiH8GpPSmPfrA8",
+    },
+    { name: "Apoiar", icon: Heart, href: "/sobre" },
+    { name: "Sair", icon: LogOut, href: "", onClick: handleLogout },
+  ];
+
   return (
-    <Sidebar collapsible="icon" >
+    <Sidebar collapsible="icon">
       <SidebarHeader>
         <SidebarMenuButton className="hover:bg-transparent">
           <Link href="/" className="flex items-center gap-2">
             <Sword color="white" />
-            <span className="text-xl font-bold hover:text-white">Desafioo.Tech</span>
+            <span className="text-xl font-bold hover:text-white">
+              Desafioo.Tech
+            </span>
           </Link>
         </SidebarMenuButton>
       </SidebarHeader>
@@ -66,7 +74,11 @@ export function AppSideBar() {
           {menuItemsFooter.map((item) => (
             <SidebarMenuItem key={item.name} className="font-semibold">
               <SidebarMenuButton asChild tooltip={item.name}>
-                <Link href={item.href} className="flex items-center gap-2">
+                <Link
+                  href={item.href}
+                  className="flex items-center gap-2"
+                  onClick={item.onClick} // Aqui, se item.onClick existir, ele será acionado
+                >
                   <item.icon className="h-5 w-5" />
                   <span>{item.name}</span>
                 </Link>

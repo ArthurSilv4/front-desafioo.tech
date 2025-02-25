@@ -4,6 +4,7 @@ import { createContext, useContext } from "react";
 import axios from "axios";
 import cookies from "js-cookie";
 import { useMutation, UseMutationResult, useQuery } from "react-query";
+import { useRouter } from "next/navigation";
 
 type UserResponse = {
   name: string;
@@ -17,6 +18,13 @@ type UpdateUserNameRequest = {
 
 type UpdateUserDescriptionRequest = {
   newDescription: string;
+};
+
+type UpdatePasswordRequest = {
+  code: string;
+  oldPassword: string;
+  newPassword: string;
+  confirmPassword: string;
 };
 
 type UserContextType = {
@@ -36,16 +44,25 @@ type UserContextType = {
     Error,
     UpdateUserDescriptionRequest
   >;
+
+  useUpdatePassword: UseMutationResult<
+    UserResponse,
+    Error,
+    UpdatePasswordRequest
+  >;
+
+  useSendCode: UseMutationResult<UserResponse, Error, void>;
 };
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
 const api = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL || "https://localhost:62005/api",
+  baseURL: process.env.NEXT_PUBLIC_API_URL || "https://localhost:64071/api",
 });
 
 const UserProvider = ({ children }: { children: React.ReactNode }) => {
   const token = cookies.get("token-desafioo.tech");
+  const router = useRouter();
 
   const useFetchUser = () => {
     const { data, isLoading } = useQuery<UserResponse>(
@@ -135,9 +152,67 @@ const UserProvider = ({ children }: { children: React.ReactNode }) => {
     }
   );
 
+  const useSendCode = useMutation<UserResponse, Error, void>(
+    async () => {
+      const response = await api.post(
+        "/User/SendConfirmationEmail",
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      return response.data;
+    },
+    {
+      onSuccess: () => {
+        alert("Código enviado com sucesso");
+      },
+      onError: (error) => {
+        console.error(error);
+      },
+    }
+  );
+
+  const useUpdatePassword = useMutation<
+    UserResponse,
+    Error,
+    UpdatePasswordRequest
+  >(
+    async (UserUpdateRequest) => {
+      const response = await api.put(
+        "/User/UpdatePassword",
+        UserUpdateRequest,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      return response.data;
+    },
+    {
+      onSuccess: () => {
+        alert("Sua senha foi alterada com sucesso. Faça login novamente.");
+        cookies.remove("token-desafioo.tech");
+        router.push("/dashboard");
+      },
+      onError: (error) => {
+        console.error(error);
+      },
+    }
+  );
+
   return (
     <UserContext.Provider
-      value={{ useFetchUser, useUpdateUserName, useUpdateUserDescription }}
+      value={{
+        useFetchUser,
+        useUpdateUserName,
+        useUpdateUserDescription,
+        useUpdatePassword,
+        useSendCode,
+      }}
     >
       {children}
     </UserContext.Provider>

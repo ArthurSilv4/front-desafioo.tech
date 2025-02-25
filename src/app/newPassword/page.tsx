@@ -20,6 +20,7 @@ import { FormProvider, useForm } from "react-hook-form";
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { useUser } from "@/context/users/page";
 
 const formSchema = z.object({
   code: z.string().nonempty({
@@ -37,6 +38,8 @@ const formSchema = z.object({
 });
 
 export default function NewPassword() {
+  const { useUpdatePassword, useSendCode } = useUser();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -48,8 +51,13 @@ export default function NewPassword() {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
+    useUpdatePassword.mutate(values);
   }
+
+  function handleSendCode() {
+    useSendCode.mutate();
+  }
+
   return (
     <main className="min-h-screen flex items-center justify-center h-full bg-gradient-to-r from-blue-500 to-blue-700">
       <Card>
@@ -79,7 +87,9 @@ export default function NewPassword() {
                     </FormItem>
                   )}
                 />
-                <Button size={"sm"}>Enviar código</Button>
+                <Button size={"sm"} onClick={handleSendCode}>
+                  Enviar código
+                </Button>
               </div>
 
               <FormField

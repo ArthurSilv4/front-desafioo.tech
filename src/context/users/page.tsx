@@ -27,6 +27,12 @@ type UpdatePasswordRequest = {
   confirmPassword: string;
 };
 
+type CreateNewUserRequest = {
+  name: string;
+  email: string;
+  password: string;
+};
+
 type UserContextType = {
   useFetchUser: () => {
     data: UserResponse | undefined;
@@ -52,12 +58,18 @@ type UserContextType = {
   >;
 
   useSendCode: UseMutationResult<UserResponse, Error, void>;
+
+  useCreateNewUser: UseMutationResult<
+    UserResponse,
+    Error,
+    CreateNewUserRequest
+  >;
 };
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
 const api = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL || "https://localhost:64071/api",
+  baseURL: process.env.NEXT_PUBLIC_API_URL || "https://localhost:54322/api",
 });
 
 const UserProvider = ({ children }: { children: React.ReactNode }) => {
@@ -204,6 +216,33 @@ const UserProvider = ({ children }: { children: React.ReactNode }) => {
     }
   );
 
+  const useCreateNewUser = useMutation<
+    UserResponse,
+    Error,
+    CreateNewUserRequest
+  >(
+    async (UserUpdateRequest) => {
+      const response = await api.post(
+        "/User/CreateNewUser",
+        UserUpdateRequest,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      return response.data;
+    },
+    {
+      onSuccess: () => {
+        alert("Usuário criado com sucesso");
+      },
+      onError: (error) => {
+        console.error(error);
+      },
+    }
+  );
+
   return (
     <UserContext.Provider
       value={{
@@ -212,6 +251,7 @@ const UserProvider = ({ children }: { children: React.ReactNode }) => {
         useUpdateUserDescription,
         useUpdatePassword,
         useSendCode,
+        useCreateNewUser,
       }}
     >
       {children}

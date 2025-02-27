@@ -10,6 +10,7 @@ type UserResponse = {
   name: string;
   email: string;
   description: string;
+  roles: string[];
 };
 
 type UpdateUserNameRequest = {

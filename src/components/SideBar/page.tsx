@@ -14,21 +14,37 @@ import {
 import { Separator } from "@radix-ui/react-separator";
 import { MessageCircle, Heart, LogOut } from "lucide-react";
 import { useAuth } from "@/context/users/auth/page";
-
-const menuItemsContent = [
-  { name: "Home", icon: Home, href: "/dashboard" },
-  { name: "Criar Desafio", icon: PlusCircle, href: "/dashboard/newChallenge" },
-  { name: "Perfil", icon: User, href: "/dashboard/profile" },
-  { name: "Criar Usuario", icon: Plus, href: "/dashboard/newUser" },
-];
+import { useUser } from "@/context/users/page";
 
 export function AppSideBar() {
   const { logout } = useAuth();
   const pathname = usePathname();
+  const { useFetchUser } = useUser();
+  const { data: user } = useFetchUser();
 
   function handleLogout() {
     logout();
   }
+
+  const menuItemsContent = [
+    { name: "Home", icon: Home, href: "/dashboard" },
+    {
+      name: "Criar Desafio",
+      icon: PlusCircle,
+      href: "/dashboard/newChallenge",
+    },
+    { name: "Perfil", icon: User, href: "/dashboard/profile" },
+    {
+      name: "Criar Usuario",
+      icon: Plus,
+      href: "/dashboard/newUser",
+      roles: ["Admin"],
+    },
+  ].filter(
+    (item) =>
+      !item.roles ||
+      (user?.roles && item.roles.some((role) => user.roles.includes(role)))
+  );
 
   const menuItemsFooter = [
     {

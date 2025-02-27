@@ -18,7 +18,7 @@ export function middleware(request: NextRequest) {
     const payload = JSON.parse(atob(token?.value.split(".")[1] || ""));
     const userRole = payload.role;
 
-    if (userRole !== "Adm") {
+    if (userRole !== "Admin") {
       return NextResponse.redirect(new URL("/", request.url));
     }
   }

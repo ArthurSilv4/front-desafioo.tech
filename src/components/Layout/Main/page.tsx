@@ -7,6 +7,7 @@ import { CTA } from "./CTA/page";
 import FAQ from "./FAQ/page";
 import { StartProgramming } from "./StartProgramming/page";
 import { Latout } from "../page";
+import { Toaster } from "sonner";
 
 interface MainProps {
   children: ReactNode;
@@ -23,6 +24,7 @@ export default function Main({ children }: MainProps) {
         <Creators />
         <FAQ />
         <Separator className="bg-gray-300 h-[1px]" />
+        <Toaster position="top-right" />
       </main>
     </Latout>
   );

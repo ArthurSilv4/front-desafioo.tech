@@ -6,6 +6,7 @@ import Cookies from "js-cookie";
 import { useMutation, useQuery } from "react-query";
 import { useRouter } from "next/navigation";
 import { queryClient } from "@/services/queryClient";
+import { toast } from "sonner";
 
 type ChallengeResponse = {
   id: string;
@@ -93,7 +94,7 @@ const ChallengeContext = createContext<ChallengeContextType | undefined>(
 );
 
 const api = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL || "https://localhost:62747/api",
+  baseURL: process.env.NEXT_PUBLIC_API_URL || "https://localhost:54322/api",
 });
 
 const ChallengeProvider = ({ children }: { children: React.ReactNode }) => {
@@ -213,7 +214,11 @@ const ChallengeProvider = ({ children }: { children: React.ReactNode }) => {
     },
     {
       onSuccess: () => {
-        setIsSuccess(true);
+        toast.success("Desafio iniciado com sucesso!", {
+          duration: 5000,
+          richColors: true,
+          description: "Verifique seu email para mais informações.",
+        });
       },
       onError: (error) => {
         console.log(error);

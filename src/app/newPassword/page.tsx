@@ -21,6 +21,8 @@ import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useUser } from "@/context/users/page";
+import { useState } from "react";
+import { Eye, EyeOff } from "lucide-react";
 
 const formSchema = z.object({
   code: z.string().nonempty({
@@ -39,6 +41,9 @@ const formSchema = z.object({
 
 export default function NewPassword() {
   const { useUpdatePassword, useSendCode } = useUser();
+  const [showPassword, setShowPassword] = useState(false);
+
+  const isLoading = useUpdatePassword.isLoading;
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -97,12 +102,24 @@ export default function NewPassword() {
                 name="oldPassword"
                 render={({ field }) => (
                   <FormItem className="mt-4">
-                    <Label>Senha antiga:</Label>
+                    <div className="flex justify-between items-center">
+                      <Label>Senha antiga:</Label>
+                      <Button
+                        type="button"
+                        className="w-12 h-10"
+                        onClick={() => setShowPassword(!showPassword)}
+                        size={"icon"}
+                      >
+                        {showPassword ? <EyeOff /> : <Eye />}
+                      </Button>
+                    </div>
+
                     <FormControl>
                       <Input
-                        type="password"
-                        placeholder="Senha Antiga"
+                        type={showPassword ? "text" : "password"}
+                        placeholder="••••••••"
                         {...field}
+                        disabled={isLoading}
                       />
                     </FormControl>
                     <FormDescription>Insira sua senha antiga</FormDescription>
@@ -119,7 +136,7 @@ export default function NewPassword() {
                     <Label>Senha nova:</Label>
                     <FormControl>
                       <Input
-                        type="password"
+                        type={showPassword ? "text" : "password"}
                         placeholder="Nova Senha"
                         {...field}
                       />
@@ -138,7 +155,7 @@ export default function NewPassword() {
                     <Label>Confirme sua senha nova:</Label>
                     <FormControl>
                       <Input
-                        type="password"
+                        type={showPassword ? "text" : "password"}
                         placeholder="Confirme a senha"
                         {...field}
                       />

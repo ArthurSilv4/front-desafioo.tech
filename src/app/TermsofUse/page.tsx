@@ -30,11 +30,12 @@ export default function TermsofUse() {
         <p>Ao utilizar este projeto, você concorda que:</p>
         <ul>
           <li>
-            O software é fornecido "como está", sem garantias de qualquer tipo.
+            O software é fornecido &quot;como está&quot;, sem garantias de
+            qualquer tipo.
           </li>
           <li>
-            O nome "desafioo.tech" não pode ser usado para promover produtos
-            derivados sem permissão.
+            O nome &quot;desafioo.tech&quot; não pode ser usado para promover
+            produtos derivados sem permissão.
           </li>
           <li>A Licença MIT completa está disponível aqui.</li>
         </ul>
@@ -49,10 +50,10 @@ export default function TermsofUse() {
 
         <h2>4. Isenção de Responsabilidade</h2>
         <p>
-          O projeto desafioo.tech é fornecido "como está", sem garantias de
-          funcionamento, segurança ou adequação a qualquer finalidade. O autor e
-          mantenedores não são responsáveis por danos diretos ou indiretos
-          resultantes do uso do projeto.
+          O projeto desafioo.tech é fornecido &quot;como está&quot;, sem
+          garantias de funcionamento, segurança ou adequação a qualquer
+          finalidade. O autor e mantenedores não são responsáveis por danos
+          diretos ou indiretos resultantes do uso do projeto.
         </p>
 
         <h2>5. Links para Terceiros</h2>
@@ -94,3 +95,4 @@ export default function TermsofUse() {
     </main>
   );
 }
+

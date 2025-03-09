@@ -1,6 +1,12 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import axios from "axios";
 import { useMutation } from "react-query";
 import { useRouter, usePathname } from "next/navigation";
@@ -55,13 +61,13 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     loginMutation.mutate(credentials);
   };
 
-  const logout = () => {
+  const logout = useCallback(() => {
     Cookies.remove("token-desafioo.tech");
     setIsAuthenticated(false);
     router.push("/singIn");
-  };
+  }, [router]);
 
-  const checkTokenExpiration = () => {
+  const checkTokenExpiration = useCallback(() => {
     const token = Cookies.get("token-desafioo.tech");
     if (!token) {
       logout();
@@ -71,7 +77,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     if (Date.now() >= tokenExpiration) {
       logout();
     }
-  };
+  }, [logout]);
 
   useEffect(() => {
     if (pathname && pathname.startsWith("/dashboard")) {
@@ -81,7 +87,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       }, 30000); // Verifica a cada 30 segundos
       return () => clearInterval(interval);
     }
-  }, [pathname]);
+  }, [pathname, router, checkTokenExpiration]);
 
   return (
     <AuthContext.Provider

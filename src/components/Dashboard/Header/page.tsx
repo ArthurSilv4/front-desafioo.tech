@@ -5,18 +5,7 @@ import { useSidebar } from "@/components/ui/sidebar";
 import { PanelRightClose, PanelRightOpen } from "lucide-react";
 
 export function DashboardHeader() {
-  const date = window.location.pathname.split("/")[2];
   const { toggleSidebar } = useSidebar();
-
-  let title = "Dashboard";
-
-  if (date === "newChallenge") {
-    title = "Dashboard - Novo Desafio";
-  } else if (date === "settings") {
-    title = "Dashboard - Configurações";
-  } else if (date === "profile") {
-    title = "Dashboard - Perfil";
-  }
 
   return (
     <header className="bg-gradient-to-r from-blue-600 to-blue-700 text-white">
@@ -25,9 +14,10 @@ export function DashboardHeader() {
           <Button onClick={toggleSidebar} size={"icon"}>
             {useSidebar().open ? <PanelRightClose /> : <PanelRightOpen />}
           </Button>
-          <h1 className="text-xl font-bold">{title}</h1>
+          <h1 className="text-xl font-bold">Dashboard</h1>
         </div>
       </div>
     </header>
   );
 }
+

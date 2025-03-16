@@ -123,14 +123,13 @@ const ChallengeProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   const useFetchChallengeUser = () => {
-    const token = Cookies.get("token-desafioo.tech");
-    if (!token) {
-      throw new Error("No authentication token found");
-    }
-
     const { data, isLoading } = useQuery<ChallengeResponse[]>(
       "challenges",
       async () => {
+        const token = Cookies.get("token-desafioo.tech");
+        if (!token) {
+          throw new Error("No authentication token found");
+        }
         const response = await api.get("/Challenge/ListChallengeUser", {
           headers: {
             "Content-Type": "application/json",

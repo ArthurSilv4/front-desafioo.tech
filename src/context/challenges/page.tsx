@@ -107,7 +107,7 @@ const ChallengeProvider = ({ children }: { children: React.ReactNode }) => {
     const { data, isLoading } = useQuery<ChallengeResponse[]>(
       "challenges",
       async () => {
-        const response = await api.get("/Challenge/ListChallenge");
+        const response = await api.get("/api/Challenge/ListChallenge");
         return response.data;
       },
       {

@@ -70,7 +70,7 @@ type UserContextType = {
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
 const api = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL || "https://localhost:54322/api",
+  baseURL: process.env.NEXT_PUBLIC_API_URL,
 });
 
 const UserProvider = ({ children }: { children: React.ReactNode }) => {

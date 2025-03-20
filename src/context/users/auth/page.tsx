@@ -31,7 +31,7 @@ type AuthContextType = {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 const api = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL || "https://localhost:62747/api",
+  baseURL: process.env.NEXT_PUBLIC_API_URL,
 });
 
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {

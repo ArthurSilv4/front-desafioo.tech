@@ -8,11 +8,9 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
-import { Users } from "lucide-react";
-import { Separator } from "@/components/ui/separator";
+import { CheckCircle, Users } from "lucide-react";
 import { useChallenge } from "@/context/challenges/page";
 import { ChallengeIdForms } from "@/components/Forms/ChallengeIdForms";
-import { Skeleton } from "@/components/ui/skeleton";
 import ReactMarkdown from "react-markdown";
 
 type SectionChallengeIdProps = {
@@ -21,49 +19,62 @@ type SectionChallengeIdProps = {
 
 export function SectionChallengeId({ id }: SectionChallengeIdProps) {
   const { useFetchChallengeById } = useChallenge();
-
   const { data: challenge, isLoading } = useFetchChallengeById(id);
 
   if (!challenge || isLoading) {
     return (
-      <section className="min-h-screen ">
-        <Separator className="h-[1px] w-full bg-gray-300 " />
-        <div className="container mx-auto p-4">
-          <div className="flex justify-between gap-4 flex-col items-start lg:flex-row">
-            <div className="lg:max-w-[50%]">
-              <h1 className="text-3xl font-bold">Carregando...</h1>
-              <div>Carregando...</div>
+      <section className="min-h-screen bg-gradient-to-b from-background to-muted/30">
+        <div className="container mx-auto py-12 px-4">
+          <div className="lg:max-w-[50%]">
+            <h1 className="text-3xl font-bold">Carregando...</h1>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 mt-2">
+            <div className="lg:col-span-3">
+              <div className="prose prose-slate dark:prose-invert max-w-none">
+                <div className="markdown-container">
+                  <ReactMarkdown>Carregando...</ReactMarkdown>
+                </div>
+              </div>
             </div>
-            <div className="flex flex-col items-center gap-4 w-full lg:w-fit">
-              <div>
-                <div className="flex items-center justify-center gap-1 mt-4">
-                  <Users fill="true" size={20} />
-                  <span className="font-semibold">
-                    0 Pessoas Já Iniciaram Esse Desafio
+
+            <div className="lg:col-span-2 space-y-6">
+              <Card className="border-2 border-border/50 shadow-lg">
+                <CardHeader className="bg-muted/50 rounded-t-lg">
+                  <CardTitle className="flex items-center text-xl">
+                    <CheckCircle className="mr-2 h-5 w-5 text-primary" />
+                    Iniciar Desafio
+                  </CardTitle>
+                  <CardDescription>
+                    Preencha com suas informações para receber o desafio
+                    completo
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="pt-6">
+                  <ChallengeIdForms id={id} />
+                </CardContent>
+              </Card>
+
+              <div className="bg-muted/50 rounded-lg p-4 border border-border/50">
+                <div className="flex items-center gap-2">
+                  <Users className="h-5 w-5 text-primary" />
+                  <span className="font-medium">
+                    0 pessoas já iniciaram este desafio
                   </span>
                 </div>
-                <Card className="w-full min-w- max-w-sm mt-4">
-                  <CardHeader>
-                    <CardTitle>Iniciar Desafio</CardTitle>
-                    <CardDescription>
-                      Preencha com suas informacoes para receber o desafio
-                      completo
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <ChallengeIdForms id={id} />
-                  </CardContent>
-                </Card>
               </div>
 
-              <div className="flex flex-col items-center mt-8 p-8 text-white bg-gradient-to-r from-blue-700 to-blue-900 rounded-lg">
-                <span className="font-bold text-xl lg:text-2xl">
-                  Desafio Criado Por
-                </span>
-                <span className="font-bold text-xl lg:text-3xl">
-                  <Skeleton className="w-36 h-6 mt-4" />
-                </span>
-              </div>
+              <Card className="overflow-hidden border-0 shadow-lg">
+                <div className="bg-gradient-to-r from-blue-700 to-blue-600 p-6 text-primary-foreground">
+                  <h3 className="text-lg font-medium opacity-90">
+                    Desafio Criado Por
+                  </h3>
+                  <p className="text-2xl font-bold mt-1">Carregando...</p>
+                </div>
+                <CardContent className="bg-muted/30 p-4">
+                  <p className="text-sm text-muted-foreground">Sem descrição</p>
+                </CardContent>
+              </Card>
             </div>
           </div>
         </div>
@@ -72,46 +83,58 @@ export function SectionChallengeId({ id }: SectionChallengeIdProps) {
   }
 
   return (
-    <section className="min-h-screen ">
-      <Separator className="h-[1px] w-full bg-gray-300 " />
-      <div className="container mx-auto p-4">
-        <div className="flex justify-between gap-4 flex-col items-start lg:flex-row">
-          <div className="lg:max-w-[50%]">
-            <h1 className="text-3xl font-bold">{challenge.title}</h1>
-            <div className="text-justify mt-4 markdown-container">
-              <ReactMarkdown>{challenge.description}</ReactMarkdown>
+    <section className="min-h-screen bg-gradient-to-b from-background to-muted/30">
+      <div className="container mx-auto py-12 px-4">
+        <div className="lg:max-w-[50%]">
+          <h1 className="text-3xl font-bold">{challenge.title}</h1>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 mt-2">
+          <div className="lg:col-span-3">
+            <div className="prose prose-slate dark:prose-invert max-w-none">
+              <div className="markdown-container">
+                <ReactMarkdown>{challenge.description}</ReactMarkdown>
+              </div>
             </div>
           </div>
-          <div className="flex flex-col items-center gap-4 w-full lg:w-fit">
-            <div>
-              <div className="flex items-center justify-center gap-1 mt-4">
-                <Users fill="true" size={20} />
-                <span className="font-semibold">
-                  {challenge.starts} Pessoas Já Iniciaram Esse Desafio
+
+          <div className="lg:col-span-2 space-y-6">
+            <Card className="border-2 border-border/50 shadow-lg">
+              <CardHeader className="bg-muted/50 rounded-t-lg">
+                <CardTitle className="flex items-center text-xl">
+                  <CheckCircle className="mr-2 h-5 w-5 text-primary" />
+                  Iniciar Desafio
+                </CardTitle>
+                <CardDescription>
+                  Preencha com suas informações para receber o desafio completo
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="pt-6">
+                <ChallengeIdForms id={id} />
+              </CardContent>
+            </Card>
+
+            <div className="bg-muted/50 rounded-lg p-4 border border-border/50">
+              <div className="flex items-center gap-2">
+                <Users className="h-5 w-5 text-primary" />
+                <span className="font-medium">
+                  {challenge.starts.toLocaleString("pt-BR")} pessoas já
+                  iniciaram este desafio
                 </span>
               </div>
-              <Card className="w-full min-w- max-w-sm mt-4">
-                <CardHeader>
-                  <CardTitle>Iniciar Desafio</CardTitle>
-                  <CardDescription>
-                    Preencha com suas informacoes para receber o desafio
-                    completo
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <ChallengeIdForms id={id} />
-                </CardContent>
-              </Card>
             </div>
 
-            <div className="flex flex-col items-center mt-8 p-8 text-white bg-gradient-to-r from-blue-700 to-blue-900 rounded-lg">
-              <span className="font-bold text-xl lg:text-2xl">
-                Desafio Criado Por
-              </span>
-              <span className="font-bold text-xl lg:text-3xl">
-                {challenge.author}
-              </span>
-            </div>
+            <Card className="overflow-hidden border-0 shadow-lg">
+              <div className="bg-gradient-to-r from-blue-700 to-blue-600 p-6 text-primary-foreground">
+                <h3 className="text-lg font-medium opacity-90">
+                  Desafio Criado Por
+                </h3>
+                <p className="text-2xl font-bold mt-1">{challenge.author}</p>
+              </div>
+              <CardContent className="bg-muted/30 p-4">
+                <p className="text-sm text-muted-foreground">Sem descrição</p>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </div>

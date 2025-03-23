@@ -8,8 +8,6 @@ export function Creators() {
   const { useFetchAuthorsChallenges } = useChallenge();
   const { data: creators, isLoading } = useFetchAuthorsChallenges();
 
-  console.log(creators);
-
   if (isLoading || !creators) {
     return (
       <section className="py-12 mb-16">

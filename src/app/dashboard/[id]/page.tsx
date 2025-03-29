@@ -1,5 +1,6 @@
 "use client";
 
+import { MarkdownEditor } from "@/components/Markdown/MarkdownEditor/page";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
@@ -22,7 +23,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
-import { Textarea } from "@/components/ui/textarea";
 import { useChallenge } from "@/context/challenges/page";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ToggleGroup, ToggleGroupItem } from "@radix-ui/react-toggle-group";
@@ -220,7 +220,7 @@ export default function DashboardChallengeId() {
                       <Label>Descrição Do Desafio*</Label>
                       <FormMessage />
                       <FormControl>
-                        <Textarea {...field} className="min-h-64" />
+                        <MarkdownEditor {...field} />
                       </FormControl>
                       <FormDescription>
                         Escreva uma descrição para o seu desafio.

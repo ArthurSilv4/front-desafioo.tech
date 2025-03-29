@@ -11,7 +11,7 @@ import {
 import { CheckCircle, Users } from "lucide-react";
 import { useChallenge } from "@/context/challenges/page";
 import { ChallengeIdForms } from "@/components/Forms/ChallengeIdForms";
-import ReactMarkdown from "react-markdown";
+import MarkdownRenderer from "@/components/Markdown/MarkdownRenderer/page";
 
 type SectionChallengeIdProps = {
   id: string;
@@ -33,7 +33,7 @@ export function SectionChallengeId({ id }: SectionChallengeIdProps) {
             <div className="lg:col-span-3">
               <div className="prose prose-slate dark:prose-invert max-w-none">
                 <div className="markdown-container">
-                  <ReactMarkdown>Carregando...</ReactMarkdown>
+                  <div>Carregando...</div>
                 </div>
               </div>
             </div>
@@ -93,7 +93,7 @@ export function SectionChallengeId({ id }: SectionChallengeIdProps) {
           <div className="lg:col-span-3">
             <div className="prose prose-slate dark:prose-invert max-w-none">
               <div className="markdown-container">
-                <ReactMarkdown>{challenge.description}</ReactMarkdown>
+                <MarkdownRenderer content={challenge.description} />
               </div>
             </div>
           </div>

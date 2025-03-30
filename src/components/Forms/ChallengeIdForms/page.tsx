@@ -11,10 +11,10 @@ import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useChallenge } from "@/context/challenges/page";
 import Link from "next/link";
-import { Button } from "../ui/button";
 import { z } from "zod";
 import { useEffect } from "react";
-import { Checkbox } from "../ui/checkbox";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Button } from "@/components/ui/button";
 
 type ChallengeIdFormsProps = {
   id: string;

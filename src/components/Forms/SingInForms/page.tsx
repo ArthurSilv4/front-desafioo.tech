@@ -23,7 +23,7 @@ const formSchema = z.object({
     .min(6, { message: "A senha deve ter pelo menos 6 caracteres" }),
 });
 
-export default function SingInForms() {
+export function SingInForms() {
   const { login, isLoading } = useAuth();
 
   const [showPassword, setShowPassword] = useState(false);

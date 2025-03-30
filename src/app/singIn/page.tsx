@@ -1,4 +1,4 @@
-import SingInForms from "@/components/Forms/SingInForms/page";
+import { SingInForms } from "@/components/Forms/SingInForms/page";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { User } from "lucide-react";
 

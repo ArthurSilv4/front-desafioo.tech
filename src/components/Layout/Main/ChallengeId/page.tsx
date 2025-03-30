@@ -10,8 +10,8 @@ import {
 
 import { CheckCircle, Users } from "lucide-react";
 import { useChallenge } from "@/context/challenges/page";
-import { ChallengeIdForms } from "@/components/Forms/ChallengeIdForms";
 import MarkdownRenderer from "@/components/Markdown/MarkdownRenderer/page";
+import { ChallengeIdForms } from "@/components/Forms/ChallengeIdForms/page";
 
 type SectionChallengeIdProps = {
   id: string;

@@ -1,14 +1,29 @@
-"use client";
-
 import { Card, CardContent } from "@/components/ui/card";
-import { useChallenge } from "@/context/challenges/page";
 import { Camera, Code2Icon } from "lucide-react";
 import Link from "next/link";
 
-export function CardChallengeList() {
-  const { useFetchChallenge } = useChallenge();
-  const { data: challengeList, isLoading } = useFetchChallenge();
+type ChallengeListProps = {
+  id: string;
+  title: string;
+  description: string;
+  dificulty: string;
+  category: string;
+  author: string;
+  links?: string[];
+  starts: number;
+};
 
+type ChallengeContextType = {
+  challengeList: ChallengeListProps[] | undefined;
+  isLoading: boolean;
+  page: string;
+};
+
+export function CardChallengeList({
+  challengeList,
+  isLoading,
+  page,
+}: ChallengeContextType) {
   if (isLoading || !challengeList) {
     return (
       <>
@@ -35,7 +50,7 @@ export function CardChallengeList() {
   return (
     <>
       {challengeList.map((challenge, index) => (
-        <Link href={`/${challenge.id}`} key={index}>
+        <Link href={`${page}${challenge.id}`} key={index}>
           <Card className="hover:shadow-lg transition-shadow mb-4 w-72 2xl:w-80">
             <CardContent className="p-4">
               <div className="flex items-start gap-3 w-full">

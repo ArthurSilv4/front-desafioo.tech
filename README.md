@@ -35,7 +35,7 @@ Pessoas selecionadas cuidadosamente criam desafios que qualquer usuário pode vi
 
 ## Apoiadores
 
-Se você acredita no potencial deste projeto e deseja contribuir para seu crescimento, pode apoiar financeiramente através da nossa [**página de apoio**](). Sua contribuição ajudará na manutenção, desenvolvimento de novas funcionalidades e melhorias na plataforma.
+Se você acredita no potencial deste projeto e deseja contribuir para seu crescimento, pode apoiar financeiramente através da nossa [**página de apoio**](https://apoia.se/desafiootech). Sua contribuição ajudará na manutenção, desenvolvimento de novas funcionalidades e melhorias na plataforma.
 
 **Qualquer valor é bem-vindo e faz a diferença para tornar essa iniciativa ainda mais acessível.**
 
@@ -80,9 +80,11 @@ Siga os passos abaixo para clonar e rodar o projeto:
 
 4. **Crie um arquivo `.env.local` na raiz do projeto e configure as variáveis de ambiente necessárias:**
 
-    ```env
-    NEXT_PUBLIC_API_URL=http://localhost:3000/api
-    ```
+  Caso a API esteja rodando em uma porta diferente, ajuste a variável `NEXT_PUBLIC_API_URL` para refletir a porta correta. Por exemplo, se a API estiver na porta `4000`:
+
+  ```env
+  NEXT_PUBLIC_API_URL=http://localhost:4000/api
+  ```
 
 5. **Inicie o servidor de desenvolvimento:**
 

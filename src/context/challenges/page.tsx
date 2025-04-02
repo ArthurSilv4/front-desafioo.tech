@@ -7,87 +7,14 @@ import { useMutation, useQuery } from "react-query";
 import { useRouter } from "next/navigation";
 import { queryClient } from "@/services/queryClient";
 import { toast } from "sonner";
-
-type ChallengeResponse = {
-  id: string;
-  title: string;
-  description: string;
-  dificulty: string;
-  category: string;
-  author: string;
-  links?: string[];
-  starts: number;
-};
-
-type StartChallengeResponse = {
-  message: string;
-  dto: {
-    name: string;
-    email: string;
-    challenge: ChallengeResponse;
-  };
-};
-
-type StartsChallengeRequest = {
-  id: string;
-  name: string;
-  email: string;
-};
-
-type CreateChallengeRequest = {
-  title: string;
-  description: string;
-  dificulty: string;
-  category: string[];
-  links?: string[];
-};
-
-type EditChallengeRequest = {
-  title?: string;
-  description?: string;
-  dificulty?: string;
-  category?: string[];
-  links?: string[];
-};
-
-type ChallengeContextType = {
-  useFetchChallenge: () => {
-    data: ChallengeResponse[] | undefined;
-    isLoading: boolean;
-  };
-  useFetchChallengeUser: () => {
-    data: ChallengeResponse[] | undefined;
-    isLoading: boolean;
-  };
-  useFetchChallengeById: (id: string) => {
-    data: ChallengeResponse | undefined;
-    isLoading: boolean;
-  };
-  useFetchAuthorsChallenges: () => {
-    data: [] | undefined;
-    isLoading: boolean;
-  };
-  useStartChallenge: {
-    mutate: (variables: StartsChallengeRequest) => void;
-    isLoading: boolean;
-  };
-  isSuccess: boolean;
-  resetSuccess: () => void;
-  useCreateChallenge: {
-    mutate: (variables: CreateChallengeRequest) => void;
-    isLoading: boolean;
-  };
-
-  useEditChallenge: {
-    mutate: (variables: { id: string } & EditChallengeRequest) => void;
-    isLoading: boolean;
-  };
-
-  useDeleteChallenge: {
-    mutate: (variables: { id: string }) => void;
-    isLoading: boolean;
-  };
-};
+import {
+  ChallengeResponse,
+  StartChallengeResponse,
+  StartsChallengeRequest,
+  CreateChallengeRequest,
+  EditChallengeRequest,
+  ChallengeContextType,
+} from "@/types/challengeType";
 
 const ChallengeContext = createContext<ChallengeContextType | undefined>(
   undefined

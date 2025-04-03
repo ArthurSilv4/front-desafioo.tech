@@ -5,34 +5,7 @@ import axios from "axios";
 import cookies from "js-cookie";
 import { useMutation, UseMutationResult, useQuery } from "react-query";
 import { useRouter } from "next/navigation";
-
-type UserResponse = {
-  name: string;
-  email: string;
-  description: string;
-  roles: string[];
-};
-
-type UpdateUserNameRequest = {
-  newName: string;
-};
-
-type UpdateUserDescriptionRequest = {
-  newDescription: string;
-};
-
-type UpdatePasswordRequest = {
-  code: string;
-  oldPassword: string;
-  newPassword: string;
-  confirmPassword: string;
-};
-
-type CreateNewUserRequest = {
-  name: string;
-  email: string;
-  password: string;
-};
+import { UserResponse, UpdateUserNameRequest, UpdateUserDescriptionRequest, UpdatePasswordRequest, CreateNewUserRequest } from "@/types/userType";
 
 type UserContextType = {
   useFetchUser: () => {

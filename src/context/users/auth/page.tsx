@@ -11,15 +11,7 @@ import axios from "axios";
 import { useMutation } from "react-query";
 import { useRouter, usePathname } from "next/navigation";
 import Cookies from "js-cookie";
-
-type LoginCredentials = {
-  email: string;
-  password: string;
-};
-
-type LoginResponse = {
-  token: string;
-};
+import { LoginCredentials, LoginResponse} from "@/types/authType"
 
 type AuthContextType = {
   login: (credentials: LoginCredentials) => void;

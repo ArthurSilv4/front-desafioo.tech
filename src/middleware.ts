@@ -14,11 +14,13 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL("/singIn", request.url));
   }
 
-  if (isAdminPage && token) {
-    const payload = JSON.parse(atob(token?.value.split(".")[1] || ""));
+  if (token && isAdminPage) {
+    const payload = JSON.parse(
+      Buffer.from(token.value.split(".")[1], "base64").toString()
+    );
     const userRole = payload.role;
 
-    if (userRole !== "Admin") {
+    if (!userRole.includes("Admin")) {
       return NextResponse.redirect(new URL("/", request.url));
     }
   }

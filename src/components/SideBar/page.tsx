@@ -52,7 +52,7 @@ export function AppSideBar() {
       icon: MessageCircle,
       href: "https://forms.gle/PU8eiH8GpPSmPfrA8",
     },
-    { name: "Apoiar", icon: Heart, href: "/sobre" },
+    { name: "Apoiar", icon: Heart, href: "https://apoia.se/desafiootech" },
     { name: "Sair", icon: LogOut, href: "", onClick: handleLogout },
   ];
 

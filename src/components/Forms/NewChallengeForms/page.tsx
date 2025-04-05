@@ -80,7 +80,7 @@ const formSchema = z.object({
 });
 
 export function NewChallengeForms() {
-  const { useCreateChallenge, isSuccess, resetSuccess } = useChallenge();
+  const { useCreateChallenge } = useChallenge();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -104,7 +104,7 @@ export function NewChallengeForms() {
   }
 
   useEffect(() => {
-    if (isSuccess) {
+    if (useCreateChallenge.isSuccess) {
       form.reset({
         title: "",
         description: "",
@@ -112,9 +112,8 @@ export function NewChallengeForms() {
         category: [],
         links: [],
       });
-      resetSuccess();
     }
-  }, [isSuccess, form, resetSuccess]);
+  }, [form, useCreateChallenge.isSuccess]);
   return (
     <FormProvider {...form}>
       <form

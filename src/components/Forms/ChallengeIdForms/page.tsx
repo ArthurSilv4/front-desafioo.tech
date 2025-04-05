@@ -33,7 +33,7 @@ const formSchema = z.object({
 });
 
 export function ChallengeIdForms({ id }: ChallengeIdFormsProps) {
-  const { useStartChallenge, isSuccess, resetSuccess } = useChallenge();
+  const { useStartChallenge } = useChallenge();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -53,15 +53,14 @@ export function ChallengeIdForms({ id }: ChallengeIdFormsProps) {
   }
 
   useEffect(() => {
-    if (isSuccess) {
+    if (useStartChallenge.isSuccess) {
       form.reset({
         name: "",
         email: "",
         terms: false,
       });
-      resetSuccess();
     }
-  }, [isSuccess, form, resetSuccess]);
+  }, [form, useStartChallenge.isSuccess]);
 
   return (
     <FormProvider {...form}>

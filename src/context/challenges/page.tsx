@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { useMutation, useQuery } from "react-query";
@@ -25,9 +25,6 @@ const api = axios.create({
 });
 
 const ChallengeProvider = ({ children }: { children: React.ReactNode }) => {
-  const [isSuccess, setIsSuccess] = useState(false);
-  const resetSuccess = () => setIsSuccess(false);
-
   const router = useRouter();
 
   const useFetchChallenge = () => {
@@ -184,11 +181,15 @@ const ChallengeProvider = ({ children }: { children: React.ReactNode }) => {
     },
     {
       onSuccess: () => {
-        setIsSuccess(true);
+        toast.success("Desafio Criado Com Sucesso!", {
+          duration: 5000,
+          richColors: true,
+        });
+        router.push("/dashboard");
+        queryClient.invalidateQueries("challenges");
       },
       onError: (error) => {
         console.error("Error creating challenge:", error);
-        setIsSuccess(false);
       },
     }
   );
@@ -225,7 +226,10 @@ const ChallengeProvider = ({ children }: { children: React.ReactNode }) => {
     },
     {
       onSuccess: () => {
-        alert("Desafio editado com sucesso!");
+        toast.success("Desafio Editado Com Sucesso!", {
+          duration: 5000,
+          richColors: true,
+        });
       },
       onError: (error) => {
         console.error("Error editing challenge:", error);
@@ -258,7 +262,10 @@ const ChallengeProvider = ({ children }: { children: React.ReactNode }) => {
     },
     {
       onSuccess: () => {
-        alert("Desafio deletado com sucesso!");
+        toast.success("Desafio Excluído Com Sucesso!", {
+          duration: 5000,
+          richColors: true,
+        });
         router.push("/dashboard");
         queryClient.invalidateQueries("challenges");
       },
@@ -275,8 +282,6 @@ const ChallengeProvider = ({ children }: { children: React.ReactNode }) => {
         useFetchChallengeUser,
         useFetchChallengeById,
         useFetchAuthorsChallenges,
-        isSuccess,
-        resetSuccess,
         useStartChallenge,
         useCreateChallenge,
         useEditChallenge,

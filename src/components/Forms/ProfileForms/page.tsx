@@ -57,16 +57,17 @@ export function ProfileForms() {
   }, [data, form]);
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
-    useUpdateUserName.mutate({
-      newName: values.name,
-    });
+    if (values.name !== data?.name) {
+      useUpdateUserName.mutate({
+        newName: values.name,
+      });
+    }
 
-    useUpdateUserDescription.mutate({
-      newDescription: values.description || "",
-    });
-
-    console.log("Atualizado com sucesso");
+    if (values.description !== data?.description) {
+      useUpdateUserDescription.mutate({
+        newDescription: values.description || "",
+      });
+    }
   }
   return (
     <FormProvider {...form}>

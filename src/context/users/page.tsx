@@ -5,7 +5,15 @@ import axios from "axios";
 import cookies from "js-cookie";
 import { useMutation, UseMutationResult, useQuery } from "react-query";
 import { useRouter } from "next/navigation";
-import { UserResponse, UpdateUserNameRequest, UpdateUserDescriptionRequest, UpdatePasswordRequest, CreateNewUserRequest } from "@/types/userType";
+import {
+  UserResponse,
+  UpdateUserNameRequest,
+  UpdateUserDescriptionRequest,
+  UpdatePasswordRequest,
+  CreateNewUserRequest,
+} from "@/types/userType";
+import { toast } from "sonner";
+import { queryClient } from "@/services/queryClient";
 
 type UserContextType = {
   useFetchUser: () => {
@@ -76,16 +84,6 @@ const UserProvider = ({ children }: { children: React.ReactNode }) => {
     UpdateUserNameRequest
   >(
     async (UserUpdateRequest) => {
-      const { data: currentUser } = await api.get("/User", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      if (currentUser.name === UserUpdateRequest.newName) {
-        throw new Error("O novo nome deve ser diferente do atual.");
-      }
-
       const response = await api.put(
         "/User/UpdateUserName",
         UserUpdateRequest,
@@ -98,6 +96,14 @@ const UserProvider = ({ children }: { children: React.ReactNode }) => {
       return response.data;
     },
     {
+      onSuccess: () => {
+        toast.success("Nome Alterado Com Sucesso!", {
+          duration: 5000,
+          richColors: true,
+        });
+        queryClient.invalidateQueries("user");
+      },
+
       onError: (error) => {
         console.error(error);
       },
@@ -110,16 +116,6 @@ const UserProvider = ({ children }: { children: React.ReactNode }) => {
     UpdateUserDescriptionRequest
   >(
     async (UserUpdateRequest) => {
-      const { data: currentUser } = await api.get("/User", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      if (currentUser.description === UserUpdateRequest.newDescription) {
-        throw new Error("A nova descrição deve ser diferente da atual.");
-      }
-
       const response = await api.put(
         "/User/UpdateDescription",
         UserUpdateRequest,
@@ -132,6 +128,13 @@ const UserProvider = ({ children }: { children: React.ReactNode }) => {
       return response.data;
     },
     {
+      onSuccess: () => {
+        toast.success("Descrição Alterada Com Sucesso!", {
+          duration: 5000,
+          richColors: true,
+        });
+        queryClient.invalidateQueries("user");
+      },
       onError: (error) => {
         console.error(error);
       },

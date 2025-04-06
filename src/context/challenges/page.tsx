@@ -37,8 +37,8 @@ const ChallengeProvider = ({ children }: { children: React.ReactNode }) => {
       },
       {
         refetchOnWindowFocus: false,
-        staleTime: 1000 * 60,
-
+        staleTime: 1000 * 60, // 1 minuto
+        cacheTime: 1000 * 60 * 5, // 5 minutos
         onError: (error) => {
           console.error(error);
         },

@@ -18,8 +18,9 @@ type SectionChallengeIdProps = {
 };
 
 export function SectionChallengeId({ id }: SectionChallengeIdProps) {
-  const { useFetchChallengeById } = useChallenge();
+  const { useFetchChallengeById, useAuthorInformations } = useChallenge();
   const { data: challenge, isLoading } = useFetchChallengeById(id);
+  const { data: author } = useAuthorInformations(id);
 
   if (!challenge || isLoading) {
     return (
@@ -132,7 +133,9 @@ export function SectionChallengeId({ id }: SectionChallengeIdProps) {
                 <p className="text-2xl font-bold mt-1">{challenge.author}</p>
               </div>
               <CardContent className="bg-muted/30 p-4">
-                <p className="text-sm text-muted-foreground">Sem descrição</p>
+                <p className="text-sm text-muted-foreground">
+                  {author?.description || "Sem descrição"}
+                </p>
               </CardContent>
             </Card>
           </div>

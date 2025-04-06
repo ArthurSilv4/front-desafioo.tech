@@ -11,6 +11,11 @@ export type ChallengeResponse = {
   starts: number;
 };
 
+export type AuthorInformationsResponse = {
+  name: string;
+  description: string;
+};
+
 export type StartChallengeResponse = {
   message: string;
   dto: {
@@ -45,6 +50,11 @@ export type EditChallengeRequest = {
 export type ChallengeContextType = {
   useFetchChallenge: () => {
     data: ChallengeResponse[] | undefined;
+    isLoading: boolean;
+  };
+
+  useAuthorInformations: (id: string) => {
+    data: AuthorInformationsResponse | undefined;
     isLoading: boolean;
   };
 

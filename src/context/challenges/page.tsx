@@ -14,6 +14,7 @@ import {
   CreateChallengeRequest,
   EditChallengeRequest,
   ChallengeContextType,
+  AuthorInformationsResponse,
 } from "@/types/challengeType";
 
 const ChallengeContext = createContext<ChallengeContextType | undefined>(
@@ -32,6 +33,27 @@ const ChallengeProvider = ({ children }: { children: React.ReactNode }) => {
       "challenges",
       async () => {
         const response = await api.get("/Challenge/ListChallenge");
+        return response.data;
+      },
+      {
+        refetchOnWindowFocus: false,
+        staleTime: 1000 * 60,
+
+        onError: (error) => {
+          console.error(error);
+        },
+      }
+    );
+    return { data, isLoading };
+  };
+
+  const useAuthorInformations = (id: string) => {
+    const { data, isLoading } = useQuery<AuthorInformationsResponse>(
+      ["author", id],
+      async () => {
+        const response = await api.get(
+          `/Challenge/AuthorInformations?challengeId=${id}`
+        );
         return response.data;
       },
       {
@@ -279,6 +301,7 @@ const ChallengeProvider = ({ children }: { children: React.ReactNode }) => {
     <ChallengeContext.Provider
       value={{
         useFetchChallenge,
+        useAuthorInformations,
         useFetchChallengeUser,
         useFetchChallengeById,
         useFetchAuthorsChallenges,

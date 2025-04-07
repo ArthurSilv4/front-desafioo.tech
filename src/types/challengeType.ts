@@ -1,5 +1,3 @@
-import { UseMutationResult } from "react-query";
-
 export type ChallengeResponse = {
   id: string;
   title: string;
@@ -47,53 +45,3 @@ export type EditChallengeRequest = {
   links?: string[];
 };
 
-export type ChallengeContextType = {
-  useFetchChallenge: () => {
-    data: ChallengeResponse[] | undefined;
-    isLoading: boolean;
-  };
-
-  useAuthorInformations: (id: string) => {
-    data: AuthorInformationsResponse | undefined;
-    isLoading: boolean;
-  };
-
-  useFetchChallengeUser: () => {
-    data: ChallengeResponse[] | undefined;
-    isLoading: boolean;
-  };
-
-  useFetchChallengeById: (id: string) => {
-    data: ChallengeResponse | undefined;
-    isLoading: boolean;
-  };
-
-  useFetchAuthorsChallenges: () => {
-    data: [] | undefined;
-    isLoading: boolean;
-  };
-
-  useStartChallenge: UseMutationResult<
-    StartChallengeResponse,
-    Error,
-    StartsChallengeRequest
-  >;
-
-  useCreateChallenge: UseMutationResult<
-    ChallengeResponse,
-    Error,
-    CreateChallengeRequest
-  >;
-
-  useEditChallenge: UseMutationResult<
-    ChallengeResponse,
-    Error,
-    { id: string } & EditChallengeRequest
-  >;
-
-  useDeleteChallenge: UseMutationResult<
-    ChallengeResponse,
-    Error,
-    { id: string }
-  >;
-};

@@ -1,8 +1,5 @@
-"use client";
-
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Github, Linkedin, Sword } from "lucide-react";
 import {
   NavigationMenu,
@@ -10,36 +7,9 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { FormProvider, useForm } from "react-hook-form";
-import {
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormMessage,
-} from "@/components/ui/form";
-import { Label } from "@/components/ui/label";
-
-const formSchema = z.object({
-  email: z.string().email({
-    message: "Por favor, insira um e-mail válido.",
-  }),
-});
+import { SubscriberForms } from "@/components/Forms/SubscriberForms/page";
 
 export function Footer() {
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      email: "",
-    },
-  });
-
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
-  }
-
   return (
     <footer className="bg-gradient-to-r from-blue-500 to-blue-700 text-white">
       <div className="container mx-auto px-4 py-8 md:py-12">
@@ -131,35 +101,7 @@ export function Footer() {
             <p className="text-sm mb-4">
               Inscreva-se para receber nossas novidades e dicas.
             </p>
-            <FormProvider {...form}>
-              <form
-                onSubmit={form.handleSubmit(onSubmit)}
-                className="flex flex-col space-y-2"
-              >
-                <FormField
-                  control={form.control}
-                  name="email"
-                  render={({ field }) => (
-                    <FormItem>
-                      <Label>Email</Label>
-                      <FormControl>
-                        <Input
-                          className="bg-white text-black"
-                          placeholder="Seu e-mail"
-                          type="email"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormDescription className="sr-only">
-                        Digite seu e-mail para receber nossas novidades.
-                      </FormDescription>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <Button type="submit">Inscrever-se</Button>
-              </form>
-            </FormProvider>
+            <SubscriberForms />
           </div>
         </div>
 

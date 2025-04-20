@@ -14,6 +14,7 @@ import {
   CreateChallengeRequest,
   EditChallengeRequest,
   AuthorInformationsResponse,
+  useFetchAuthorsChallengesResponse,
 } from "@/types/challengeType";
 import { UseMutationResult } from "react-query";
 
@@ -39,7 +40,7 @@ export type ChallengeContextType = {
   };
 
   useFetchAuthorsChallenges: () => {
-    data: [] | undefined;
+    data: useFetchAuthorsChallengesResponse | undefined;
     isLoading: boolean;
   };
 
@@ -170,7 +171,7 @@ const ChallengeProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   const useFetchAuthorsChallenges = () => {
-    const { data, isLoading } = useQuery<[]>(
+    const { data, isLoading } = useQuery<useFetchAuthorsChallengesResponse>(
       "AuthorsChallenges",
       async () => {
         const response = await api.get("/Challenge/ListAuthorsChallenge");

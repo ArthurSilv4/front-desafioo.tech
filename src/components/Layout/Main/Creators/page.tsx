@@ -41,7 +41,7 @@ export function Creators() {
         <Separator className="h-[1px] bg-gray-300 mb-8" />
 
         <div className="flex flex-wrap justify-center gap-2">
-          {creators.map((creator, index) => {
+          {creators.authors.map((creator, index) => {
             return (
               <Link key={index} href={``}>
                 <div className="min-w-56 flex flex-col items-center">

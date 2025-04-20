@@ -9,6 +9,10 @@ export type ChallengeResponse = {
   starts: number;
 };
 
+export type useFetchAuthorsChallengesResponse = {
+  authors: string[];
+};
+
 export type AuthorInformationsResponse = {
   name: string;
   description: string;
@@ -44,4 +48,3 @@ export type EditChallengeRequest = {
   category?: string[];
   links?: string[];
 };
-

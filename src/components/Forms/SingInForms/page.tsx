@@ -40,9 +40,9 @@ export function SingInForms() {
     login(values);
   }
 
-  async function handleGuestAccess() {
-    console.log("Entrando como convidado");
-  }
+  // async function handleGuestAccess() {
+  //   console.log("Entrando como convidado");
+  // }
 
   return (
     <>
@@ -99,7 +99,7 @@ export function SingInForms() {
         </form>
       </FormProvider>
 
-      <div className="relative my-4">
+      {/* <div className="relative my-4">
         <div className="absolute inset-0 flex items-center">
           <div className="w-full border-t"></div>
         </div>
@@ -115,7 +115,7 @@ export function SingInForms() {
         disabled={isLoading}
       >
         {isLoading ? "Entrando..." : "Entrar como Convidado"}
-      </Button>
+      </Button> */}
     </>
   );
 }

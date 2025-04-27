@@ -28,8 +28,8 @@ const formSchema = z.object({
   }),
 });
 
-export function NewUserForms(){
-    const { useCreateNewUser } = useUser();
+export function NewUserForms() {
+  const { useCreateNewUser } = useUser();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -53,68 +53,68 @@ export function NewUserForms(){
       });
     }
   }, [useCreateNewUser.isSuccess, form]);
-    return(
-        <FormProvider {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)}>
-            <FormField
-              control={form.control}
-              name="name"
-              render={({ field }) => (
-                <FormItem>
-                  <Label>Nome:</Label>
-                  <FormControl>
-                    <Input type="text" placeholder="Nome" {...field} />
-                  </FormControl>
-                  <FormDescription>
-                    Insira seu nome para começar o desafio
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+  return (
+    <FormProvider {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)}>
+        <FormField
+          control={form.control}
+          name="name"
+          render={({ field }) => (
+            <FormItem>
+              <Label>Nome:</Label>
+              <FormControl>
+                <Input type="text" placeholder="Nome" {...field} />
+              </FormControl>
+              <FormDescription>
+                Insira seu nome para começar o desafio
+              </FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
 
-            <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem>
-                  <Label>Email:</Label>
-                  <FormControl>
-                    <Input type="email" placeholder="Email" {...field} />
-                  </FormControl>
-                  <FormDescription>
-                    Insira seu email para começar o desafio
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+        <FormField
+          control={form.control}
+          name="email"
+          render={({ field }) => (
+            <FormItem>
+              <Label>Email:</Label>
+              <FormControl>
+                <Input type="email" placeholder="Email" {...field} />
+              </FormControl>
+              <FormDescription>
+                Insira seu email para começar o desafio
+              </FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
 
-            <FormField
-              control={form.control}
-              name="password"
-              render={({ field }) => (
-                <FormItem>
-                  <Label>Senha:</Label>
-                  <FormControl>
-                    <Input type="password" placeholder="Senha" {...field} />
-                  </FormControl>
-                  <FormDescription>
-                    Insira sua senha para começar o desafio
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+        <FormField
+          control={form.control}
+          name="password"
+          render={({ field }) => (
+            <FormItem>
+              <Label>Senha:</Label>
+              <FormControl>
+                <Input type="text" placeholder="Senha" {...field} />
+              </FormControl>
+              <FormDescription>
+                Insira sua senha para começar o desafio
+              </FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
 
-            <Button
-              type="submit"
-              className="w-full mt-4"
-              disabled={useCreateNewUser.isLoading}
-            >
-              {useCreateNewUser.isLoading ? "Enviando..." : "Começar"}
-            </Button>
-          </form>
-        </FormProvider>
-    )
+        <Button
+          type="submit"
+          className="w-full mt-4"
+          disabled={useCreateNewUser.isLoading}
+        >
+          {useCreateNewUser.isLoading ? "Enviando..." : "Começar"}
+        </Button>
+      </form>
+    </FormProvider>
+  );
 }

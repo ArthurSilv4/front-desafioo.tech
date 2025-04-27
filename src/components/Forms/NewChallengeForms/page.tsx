@@ -295,7 +295,9 @@ export function NewChallengeForms() {
           )}
         />
 
-        <Button type="submit">Criar Desafio</Button>
+        <Button type="submit" disabled={useCreateChallenge.isLoading}>
+          {useCreateChallenge.isLoading ? "Enviando..." : "Começar"}
+        </Button>
       </form>
     </FormProvider>
   );

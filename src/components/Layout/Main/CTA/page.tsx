@@ -20,7 +20,7 @@ export function CTA() {
               <span> {cta.title}</span>
             </h1>
             <p className="text-lg mb-8">{cta.description}</p>
-            <Link href={"#challenge"}>
+            <Link href="/9512ab4a-fb0d-46bf-9800-772092cc6932">
               <Button className="font-semibold py-2 px-4 rounded">
                 {cta.button}
               </Button>

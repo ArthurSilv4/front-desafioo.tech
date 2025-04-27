@@ -72,7 +72,12 @@ export function ChallengeIdForms({ id }: ChallengeIdFormsProps) {
             <FormItem>
               <Label>Nome:</Label>
               <FormControl>
-                <Input type="text" placeholder="Nome" {...field} />
+                <Input
+                  type="text"
+                  placeholder="Nome"
+                  disabled={useStartChallenge.isLoading}
+                  {...field}
+                />
               </FormControl>
               <FormDescription>
                 Insira seu nome para começar o desafio
@@ -91,6 +96,7 @@ export function ChallengeIdForms({ id }: ChallengeIdFormsProps) {
                 <Input
                   type="email"
                   placeholder="Email@example.com"
+                  disabled={useStartChallenge.isLoading}
                   {...field}
                 />
               </FormControl>

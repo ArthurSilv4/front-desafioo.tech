@@ -64,11 +64,11 @@ export function CardChallengeList({
                   <div className="flex items-center gap-1 text-gray-500 text-sm">
                     <Camera className="w-4 h-4" />
                     <span className="inline-block">
-                      {`Mais de ${
-                        challenge.starts === 0
-                          ? Math.floor(Math.random() * 3) + 1
-                          : challenge.starts
-                      } pessoas já começaram`}
+                      {challenge.starts === 0
+                        ? "Nenhuma pessoa começou ainda"
+                        : challenge.starts === 1
+                        ? `${challenge.starts} pessoa já começou`
+                        : `${challenge.starts} pessoas já começaram`}
                     </span>
                   </div>
                 </div>

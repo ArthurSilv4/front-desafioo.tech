@@ -119,8 +119,15 @@ export function SectionChallengeId({ id }: SectionChallengeIdProps) {
               <div className="flex items-center gap-2">
                 <Users className="h-5 w-5 text-primary" />
                 <span className="font-medium">
-                  {challenge.starts.toLocaleString("pt-BR")} pessoas já
-                  iniciaram este desafio
+                  {challenge.starts === 0
+                    ? "Nenhuma pessoa iniciou este desafio ainda"
+                    : challenge.starts === 1
+                    ? `${challenge.starts.toLocaleString(
+                        "pt-BR"
+                      )} pessoa já iniciou este desafio`
+                    : `${challenge.starts.toLocaleString(
+                        "pt-BR"
+                      )} pessoas já iniciaram este desafio`}
                 </span>
               </div>
             </div>

@@ -96,6 +96,9 @@ export function SectionChallengeId({ id }: SectionChallengeIdProps) {
               <div className="markdown-container">
                 <MarkdownRenderer content={challenge.description} />
               </div>
+              <div className="font-bold text-blue-900 text-center mt-4">
+                --- Inicie o desafio para acessar o conteúdo completo ---
+              </div>
             </div>
           </div>
 

@@ -50,7 +50,7 @@ Este projeto foi desenvolvido com as seguintes tecnologias:
 
 ## 3 - Apoiadores
 
-Se você acredita no potencial deste projeto e deseja contribuir para seu crescimento, pode apoiar financeiramente através da nossa [página de apoio](https://apoia.se/desafiootech).  
+Se você acredita no potencial deste projeto e deseja contribuir para seu crescimento, pode apoiar financeiramente através da nossa [**página de apoio**](https://apoia.se/desafiootech).  
 Sua contribuição ajudará na manutenção, desenvolvimento de novas funcionalidades e melhorias na plataforma.
 
 **Qualquer valor é bem-vindo e faz a diferença para tornar essa iniciativa ainda mais acessível.**

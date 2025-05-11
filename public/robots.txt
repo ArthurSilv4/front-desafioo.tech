@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://desafioo.tech
+
+# Sitemaps
+Sitemap: https://desafioo.tech/sitemap.xml

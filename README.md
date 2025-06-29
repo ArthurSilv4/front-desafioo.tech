@@ -1,127 +1,97 @@
-# Desafioo.tech - Plataforma de Desafios de Programação (Frontend)
+# Desafioo.tech
 
-[![Criado por Arthur Souza](https://img.shields.io/badge/created%20by-@ArthurSilv4-4BBAAB.svg)](https://github.com/ArthurSilv4)
-[![License](https://img.shields.io/github/license/ArthurSilv4/front-desafioo.tech)](https://opensource.org/licenses/MIT)
-[![Stars](https://img.shields.io/github/stars/arthursilv4/front-desafioo.tech)](https://github.com/arthursilv4/front-desafioo.tech)
+## O que é o Desafioo.tech?
 
-**Desafioo.tech** é uma plataforma open-source para aprendizado e prática de programação, conectando profissionais, professores e estudantes através de desafios reais do mercado.
+O Desafioo.tech é uma plataforma open-source de desafios de programação que conecta profissionais, professores e estudantes. A plataforma permite que os usuários pratiquem suas habilidades de programação com desafios reais do mercado, recebam feedbacks e compartilhem suas soluções.
 
-> **Este repositório contém apenas o frontend da plataforma.**  
-> Para acessar o backend/API, visite: [https://github.com/ArthurSilv4/api-desafioo.tech](https://github.com/ArthurSilv4/api-desafioo.tech)
+Este é o repositório do frontend. Para o backend/API, acesse: [https://github.com/ArthurSilv4/api-desafioo.tech](https://github.com/ArthurSilv4/api-desafioo.tech)
 
-Acesse em: [https://desafioo.tech](https://desafioo.tech)
-
----
-
-## Sumário
-
-1. [Funcionalidades](#1---funcionalidades)
-2. [Tecnologias](#2---tecnologias)
-3. [Apoiadores](#3---apoiadores)
-4. [Instalação](#4---instalação)
-5. [Contribuições](#5---contribuições)
-
----
-
-## 1 - Funcionalidades
+## Funcionalidades
 
 - **Explorar Desafios:** Visualize desafios criados por profissionais do mercado.
-- **Inscrição em Desafios:** Cadastre-se com nome e e-mail para receber desafios e dicas diretamente no seu e-mail.
-- **Compartilhamento:** Compartilhe suas soluções e conquistas em redes sociais.
-- **Feedback:** Receba feedbacks sobre suas soluções.
-- **Administração:** Professores e profissionais podem criar, editar e remover desafios.
-- **Comunidade:** Abra issues, envie sugestões e contribua para a evolução da plataforma.
+- **Inscrição em Desafios:** Cadastre-se para receber desafios e dicas por e-mail.
+- **Administração:** Crie, edite e remova desafios.
+- **Comunidade:** Contribua com a plataforma através de issues e sugestões.
 
----
+## Arquitetura
 
-## 2 - Tecnologias
+O projeto foi desenvolvido com uma arquitetura baseada em componentes, utilizando o Next.js como framework principal. A estrutura do projeto foi pensada para ser escalável e de fácil manutenção, separando as responsabilidades em diferentes camadas:
 
-Este projeto foi desenvolvido com as seguintes tecnologias:
+- **Apresentação:** A camada de apresentação é responsável por renderizar a interface do usuário e capturar as interações do usuário. Ela é composta por páginas, componentes, hooks e contextos.
+- **Serviços:** A camada de serviços é responsável por fazer a comunicação com a API, buscando e enviando dados.
+- **Domínio:** A camada de domínio é responsável por conter as regras de negócio da aplicação. Ela é composta por tipos e validadores.
 
-- ![React](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=white)
-- ![Next.js](https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)
-- ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
-- ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)
-- [API Desafioo.tech (backend)](https://github.com/ArthurSilv4/api-desafioo.tech)
-- CI/CD: GitHub Actions
-- Hospedagem: Vercel
+## Tecnologias
 
----
+- **Framework:** Next.js
+- **Linguagem:** TypeScript
+- **Estilização:** Tailwind CSS
+- **Formulários:** React Hook Form e Zod
+- **Gerenciamento de Estado:** React Query
+- **Editor de Markdown:** Bytemd
+- **UI Components:** Radix UI e Lucide React
+- **Linting:** ESLint
+- **Commits:** Commitlint e Husky
 
-## 3 - Apoiadores
+## Estrutura do Projeto
 
-Se você acredita no potencial deste projeto e deseja contribuir para seu crescimento, pode apoiar financeiramente através da nossa [**página de apoio**](https://apoia.se/desafiootech).  
-Sua contribuição ajudará na manutenção, desenvolvimento de novas funcionalidades e melhorias na plataforma.
+- **`/src/app`**: Páginas da aplicação.
+- **`/src/components`**: Componentes reutilizáveis.
+- **`/src/context`**: Contextos da aplicação.
+- **`/src/hooks`**: Hooks personalizados.
+- **`/src/lib`**: Funções utilitárias.
+- **`/src/providers`**: Provedores da aplicação.
+- **`/src/services`**: Serviços da aplicação.
+- **`/src/types`**: Tipos da aplicação.
+- **`/public`**: Arquivos estáticos.
 
-**Qualquer valor é bem-vindo e faz a diferença para tornar essa iniciativa ainda mais acessível.**
-
----
-
-## 4 - Instalação
-
-Siga os passos abaixo para rodar o projeto localmente:
+## Instalação
 
 1. **Clone o repositório:**
-
-    ```bash
-    git clone https://github.com/arthursilv4/front-desafioo.tech.git
-    ```
+   ```bash
+   git clone https://github.com/arthursilv4/front-desafioo.tech.git
+   ```
 
 2. **Acesse o diretório:**
-
-    ```bash
-    cd front-desafioo.tech
-    ```
+   ```bash
+   cd front-desafioo.tech
+   ```
 
 3. **Instale as dependências:**
+   ```bash
+   npm install
+   ```
 
-    ```bash
-    npm install
-    ```
+4. **Configure as variáveis de ambiente:**
+   Crie um arquivo `.env.local` e adicione:
+   ```env
+   NEXT_PUBLIC_API_URL=http://localhost:4000/api
+   ```
 
-    ou
+5. **Inicie o servidor:**
+   ```bash
+   npm run dev
+   ```
 
-    ```bash
-    yarn install
-    ```
+## Contribuições
 
-4. **Configure as variáveis de ambiente:**  
-    Crie um arquivo `.env.local` na raiz do projeto e adicione:
+Contribuições são bem-vindas! Para contribuir, siga os passos:
 
-    ```env
-    NEXT_PUBLIC_API_URL=http://localhost:4000/api
-    ```
+1. **Fork o repositório.**
+2. **Crie uma nova branch:**
+   ```bash
+   git checkout -b minha-feature
+   ```
+3. **Faça suas alterações e commit:**
+   ```bash
+   git commit -m "feat: minha nova feature"
+   ```
+4. **Envie suas alterações:**
+   ```bash
+   git push origin minha-feature
+   ```
+5. **Abra um Pull Request.**
 
-    (Ajuste a porta conforme necessário.)
+## Licença
 
-5. **Inicie o servidor de desenvolvimento:**
-
-    ```bash
-    npm run dev
-    ```
-
-    ou
-
-    ```bash
-    yarn dev
-    ```
-
-6. **Acesse no navegador:**
-
-    ```bash
-    http://localhost:3000
-    ```
-
----
-
-## 5 - Contribuições
-
-Contribuições são bem-vindas!  
-Abra uma issue, envie um pull request ou compartilhe feedbacks.
-
----
-
-**Obrigado por acessar o Desafioo.tech!**  
-Estamos empolgados em tê-lo aqui e esperamos que você aproveite ao máximo a plataforma.  
-Se tiver dúvidas ou sugestões, não hesite em entrar em contato conosco.  
-Juntos, podemos tornar o aprendizado de programação ainda mais acessível!
+Este projeto está licenciado sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
